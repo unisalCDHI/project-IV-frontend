@@ -1,1 +1,6 @@
-<p>home-component works!</p>
+<p>{{ teste.toString() }}</p>
+
+<form [formGroup]="formTest" (ngSubmit)="onSubmit()">
+    <input formControlName="name">
+    <button type="submit">Registrar</button>
+</form>
