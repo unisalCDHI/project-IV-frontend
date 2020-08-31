@@ -12,7 +12,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
   - Para rodar teste unitários: `ng test`
   
   - Para criar um componente, só rodar o comando: 
-      `ng g c <nome-do-componente>` ou `ng generate component <nome-do-componente>`
+      `ng g c <nome-do-componente> --module app` ou `ng generate component <nome-do-componente> --module app`
       o comando vai gerar uma pasta com os arquivos .ts e .html dentro junto com o arquivo de testes, entao certifique-se de usá-lo dentro da pasta certa (geralmente abaixo da         src) 
 
       - você pode gerar outros tipos de componentes além do padrão, ou apenas editá-los depois de serem criados, segue a lista do q pode ser gerado trocando a parte do comando           `component`: (exemplo: `ng g directive <nome-da-diretiva>` ou `ng g module <nome-do-modulo>`
