@@ -1,3 +1,4 @@
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -28,7 +29,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     AngularMaterialModule,
     FlexLayoutModule
   ],
-  providers: [ ],
+  providers: [ MatSnackBar ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
