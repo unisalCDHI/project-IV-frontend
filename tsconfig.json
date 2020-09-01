@@ -3,5 +3,14 @@
       "experimentalDecorators": true,
       "allowJs": true,
       "target": "es5"
-  }
+  },
+  "files": [],
+  "references": [
+    {
+      "path": "./tsconfig.app.json"
+    },
+    {
+      "path": "./tsconfig.spec.json"
+    }
+]
 }
