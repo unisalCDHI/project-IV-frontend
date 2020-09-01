@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 export class AppComponent {
   title = 'project-iv-frontend';
   token: string;
-
+  
   constructor(private router: Router) { }
 
   ngOnInit() {

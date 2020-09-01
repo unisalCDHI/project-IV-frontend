@@ -1,9 +1,8 @@
-import { map } from 'rxjs/operators';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { environment } from './../../environments/environment';
-import { User } from './../models/user';
+import { User } from './../shared/models/user';
 import { CrudService } from './crud.service';
 
 @Injectable({

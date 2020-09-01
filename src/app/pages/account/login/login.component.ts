@@ -1,5 +1,5 @@
-import { AppComponent } from './../app.component';
-import { LoginService } from './../services/login.service';
+import { AppComponent } from '../../../app.component';
+import { LoginService } from '../../../services/login.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';

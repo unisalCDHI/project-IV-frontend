@@ -1,6 +1,6 @@
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { UserService } from './../services/user.service';
+import { UserService } from '../../../services/user.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({

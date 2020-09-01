@@ -1,11 +1,15 @@
 <!-- Toolbar -->
 <mat-toolbar class="app-header">
-    <div></div>
-    <span class="nav-tool-items">
-      <a *ngIf="!token" gIf="Property"  mat-button routerLink="login" routerLinkActive="active">Log in</a>
-      <a *ngIf="token" mat-button (click)="logout()" routerLinkActive="active">Log out</a>
-      <a mat-button mat-raised-button routerLink="register" routerLinkActive="active">Register</a>
-    </span>
-  </mat-toolbar>
-  
+  <div>    
+    <a mat-button routerLink="/" routerLinkActive="active">Home</a>
+  </div>
+  <span class="nav-tool-items">
+    <a *ngIf="!token" gIf="Property" mat-button routerLink="login" routerLinkActive="active">Log in</a>
+    <a *ngIf="token" mat-button (click)="logout()" routerLinkActive="active">Log out</a>
+    <a *ngIf="!token" mat-button mat-raised-button routerLink="register" routerLinkActive="active">Register</a>
+  </span>
+</mat-toolbar>
+
+<app-menu *ngIf="token"></app-menu>
+
 <router-outlet></router-outlet>
