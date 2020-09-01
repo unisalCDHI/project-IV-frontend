@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { UserService } from '../../../services/user.service';
@@ -12,7 +13,11 @@ export class RegisterComponent implements OnInit {
 
   registerUserForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private userService: UserService, private _snackBar: MatSnackBar) { }
+  constructor(private formBuilder: FormBuilder, private userService: UserService, private _snackBar: MatSnackBar, private router: Router) { 
+    if (localStorage.getItem('token')) {
+      this.router.navigate(['']);
+    }
+  }
 
   ngOnInit(): void {
     this.buildForm();
