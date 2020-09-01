@@ -1,19 +1,25 @@
+import { AppComponent } from './../app.component';
 import { LoginService } from './../services/login.service';
-import { UserService } from './../services/user.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import {MatSnackBar} from '@angular/material/snack-bar';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private loginService: LoginService, private _snackBar: MatSnackBar) { }
+  constructor(private formBuilder: FormBuilder, private _snackBar: MatSnackBar, private loginService: LoginService, private router: Router, private appComponent: AppComponent) {
+    if (localStorage.getItem('token')) {
+      this.router.navigate(['']);
+    }
+  }
 
   ngOnInit(): void {
     this.buildForm();
@@ -27,12 +33,15 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    this.loginService.save(this.loginForm.value).subscribe(res => {
-
-    }, error => {
-      this._snackBar.open(error.error.message, "Fechar", {
-        duration: 2000,
-      });
-    })
+    this.loginService.login(this.loginForm.value).pipe(first())
+      .subscribe(res => {
+        localStorage.setItem('token', res.headers.get('Authorization'));
+        this.appComponent.changeToken();
+        this.router.navigate(['']);
+      }, error => {
+        this._snackBar.open(error.error ? error.error.message : 'Erro desconhecido.', "Fechar", {
+          duration: 2000,
+        });
+      })
   }
 }

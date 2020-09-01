@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
 
@@ -29,11 +29,11 @@ export class RegisterComponent implements OnInit {
   onSubmit() {
     this.userService.save(this.registerUserForm.value).subscribe(res => {
       this._snackBar.open(this.registerUserForm.value.email + " registrado com sucesso, confirme seu e-mail.", "Fechar", {
-        duration: 5000,
+        duration: 5000
       });
     }, error => {
-      this._snackBar.open(error.error.message, "Fechar", {
-        duration: 2000,
+      this._snackBar.open(error.error ? error.error.message : "Erro desconhecido", "Fechar", {
+        duration: 2000
       });
     })
   }
