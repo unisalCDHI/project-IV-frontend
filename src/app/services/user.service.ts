@@ -10,7 +10,7 @@ import { CrudService } from './crud.service';
   export class UserService extends CrudService<User, number> {
   
     constructor(protected _http: HttpClient) {
-        super(_http, environment.apiUrl + '/user')
+        super(_http, environment.apiUrl + '/users')
     }
 }
   
