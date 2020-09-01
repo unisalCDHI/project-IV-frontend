@@ -11,8 +11,7 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 })
 export class LoginComponent implements OnInit {
 
-  userForm: FormGroup;
-
+  loginForm: FormGroup;
 
   constructor(private formBuilder: FormBuilder, private loginService: LoginService, private _snackBar: MatSnackBar) { }
 
@@ -21,18 +20,17 @@ export class LoginComponent implements OnInit {
   }
 
   buildForm() {
-    this.userForm = this.formBuilder.group({
+    this.loginForm = this.formBuilder.group({
       email: [null],
       password: [null]
     });
   }
 
   onSubmit() {
-    this.loginService.save(this.userForm.value).subscribe(res => {
+    this.loginService.save(this.loginForm.value).subscribe(res => {
 
     }, error => {
-      console.log(error)
-      this._snackBar.open(error.error.message, "Close", {
+      this._snackBar.open(error.error.message, "Fechar", {
         duration: 2000,
       });
     })
