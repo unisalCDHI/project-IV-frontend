@@ -18,10 +18,13 @@
 
             button {
                 width: 100%;
+                font-size: 24px;
+                height: 100%;
+                color: white;
             }
 
             #post-button {
-                font-size: 15px;
+                font-size: 24px;
                 border-radius: 20px;
                 height: 70px;
                 margin: auto;
@@ -32,6 +35,16 @@
             }
         }
     }
+}
+
+.menu-btn{
+    text-align: left;
+    padding-left: 30%;
+}
+
+.icon{
+    width:50px;
+    margin-right: 10px;
 }
 
 #menu:before {

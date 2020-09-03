@@ -13,6 +13,10 @@ import { LoginComponent } from './pages/account/login/login.component';
 import { RegisterComponent } from './pages/account/register/register.component';
 import { Interceptor } from './services/interceptor.module';
 import { MenuComponent } from './shared/components/menu/menu.component';
+import { NotificationComponent } from './pages/notification/notification.component';
+import { MessagesComponent } from './pages/messages/messages.component';
+import { ProfileComponent } from './pages/profile/profile.component';
+import { TeamComponent } from './pages/team/team.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +24,11 @@ import { MenuComponent } from './shared/components/menu/menu.component';
     HomeComponent,
     LoginComponent,
     RegisterComponent,
-    MenuComponent
+    MenuComponent,
+    NotificationComponent,
+    MessagesComponent,
+    ProfileComponent,
+    TeamComponent
   ],
   imports: [
     BrowserModule,
