@@ -9,3 +9,75 @@
     border-radius: 10px;
     max-width: 330px;
 }
+
+.icon{
+    display: inline-block;
+    height: 50px;
+    width: 50px;
+    border-radius: 60px;
+    box-shadow: 0px 0px 2px #888;
+    padding: 0.5em 0.6em;
+    position: relative;
+
+}
+
+.poster-icon{
+    float:left;
+    margin-top: -20px;
+    margin-left: -20px;
+    margin-right: 5px;
+}
+
+.poster-address-wrapper{
+    float:left;
+    margin-top:-28px;
+    margin-left: -5px;
+}
+
+.poster-name-wrapper{
+    float:left;
+    margin-top:-25px;
+    margin-left:8px;
+    font-size: 21px;
+    font-weight: bold;
+}
+
+.post-text{
+    margin-left: 50px;
+    width: 300px;
+}
+
+#btn-post{
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    font-style: white;
+    width: 100px;
+    height: 40px;
+}
+
+#btn-attachment{
+    background: transparent;
+    box-shadow: 0px 0px 0px transparent;
+    border: 0px solid transparent;
+    text-shadow: 0px 0px 0px transparent;
+}
+
+#btn-emoji{
+    background: transparent;
+    box-shadow: 0px 0px 0px transparent;
+    border: 0px solid transparent;
+    text-shadow: 0px 0px 0px transparent;
+    margin-right: 350px;
+}
+
+#attach-img{
+    width: 20px;
+    height: 20px;
+}
+
+#emoji-img{
+    width: 20px;
+    height: 20px;
+}
+

@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NotificationComponent implements OnInit {
 
+  //rgb(75, 75, 222) - cor das reações
   constructor() { }
 
   ngOnInit(): void {
