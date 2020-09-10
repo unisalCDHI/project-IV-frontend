@@ -1,0 +1,29 @@
+.container{
+    height: 100%; 
+    border: 2px solid #2c4863;
+    border-radius: 1px;  
+}
+
+.search-box{
+    border: 5px solid #6a8297;
+    border-radius: 4px;
+    margin-top: 5px;
+    margin-left: 8px;
+}
+
+#search-btn{
+    margin-top: 3px;
+    width: 40px;
+    height: 40px;
+}
+
+#button-search-btn{
+    background: transparent;
+    box-shadow: 0px 0px 0px transparent;
+    border: 0px solid transparent;
+    text-shadow: 0px 0px 0px transparent;
+}
+
+#btn-search-icon{
+    float: right;
+}

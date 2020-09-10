@@ -4,8 +4,8 @@
             <mat-label>Alguma novidade?</mat-label>
             <textarea matInput style="resize: none;"></textarea>
             <div class="actions-wrapper">
-                <button mat-raised-button id="btn-attachment"><img id="attach-img" src="../../../assets/img/attach.png"/></button>
-                <button mat-raised-button id="btn-emoji"><img id="emoji-img" src="../../../assets/img/emoji.png"/></button>
+                <button mat-raised-button id="btn-attachment"><img id="attach-img" src="../../../assets/img/attach-white.png"/></button>
+                <button mat-raised-button id="btn-emoji"><img id="emoji-img" src="../../../assets/img/emoji_yellow.png"/></button>
                 <button mat-raised-button color="primary" id="btn-post">Postar</button>
             </div>
             
@@ -38,11 +38,13 @@
                             </p>
                          </div>
                          <div class="post-attachment-img">
-
-                            <img />
-
+                            <img src="../../../assets/img/meeting.jpg" class="post-img-container"/>
                          </div>
-                         
+                         <div class="react-comment-share">
+                            <button mat-raised-button class="react"> <img class="react-btn" src="../../../assets/img/heart_reaction.png" alt=""></button>
+                            <button mat-raised-button class="comment"><img class="comment-btn" src="../../../assets/img/comment_white.png" alt=""></button>
+                            <button mat-raised-button class="share"><img class="share-btn" src="../../../assets/img/share_white.png" alt=""></button>
+                         </div>
                         
                     </div>
                 </mat-card-content>
