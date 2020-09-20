@@ -27,3 +27,35 @@
 #btn-search-icon{
     float: right;
 }
+
+.person{
+    margin-top: 10px;
+    margin-left: 12px;
+    width: 93%;
+    height: 70px;
+}
+
+.icon{
+    display: inline-block;
+    height: 50px;
+    width: 50px;
+    border-radius: 60px;
+    box-shadow: 0px 0px 2px #888;
+    padding: 0.5em 0.6em;
+}
+
+.icon-wrapper{
+    float: left;
+}
+
+.data-wrapper{
+    float: left;
+    color: white;
+}
+
+.name{
+    margin-left: 8px;
+    margin-top: 2px;
+    font-size: 25px;
+    font-weight: bold;
+}
