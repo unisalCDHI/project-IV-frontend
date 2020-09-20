@@ -13,4 +13,4 @@ res.sendFile(path.join(__dirname+'/dist/project-iv-frontend/index.html'));
 });
 
 // Inicia a aplicação pela porta configurada
-app.listen(process.env.PORT || 4200);
+app.listen(process.env.PORT || 8080);
