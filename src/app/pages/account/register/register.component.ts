@@ -26,6 +26,7 @@ export class RegisterComponent implements OnInit {
   buildForm() {
     this.registerUserForm = this.formBuilder.group({
       name: [null],
+      username: [null],
       email: [null],
       password: [null]
     });
