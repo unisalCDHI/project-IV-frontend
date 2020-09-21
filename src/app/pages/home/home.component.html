@@ -33,7 +33,7 @@
                                 {{post.body}}
                             </p>
                          </div>
-                         <div class="post-attachment-img">
+                         <div *ngIf="post.image !== ''"  class="post-attachment-img">
                             <img [src]="post.image" class="post-img-container"/>
                          </div>
                          <div class="react-comment-share">
