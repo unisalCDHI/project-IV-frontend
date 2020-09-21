@@ -37,7 +37,10 @@
                             <img [src]="post.image" class="post-img-container"/>
                          </div>
                          <div class="react-comment-share">
-                            <button mat-raised-button class="heart" (click)="like(post)"> <img class="heart-btn" [ngClass]="{'liked': isLiked(post)}" src="../../../assets/img/heart_reaction.png" alt=""></button>
+                            <button mat-raised-button class="heart" (click)="like(post)"> 
+                                <img class="heart-btn" *ngIf="!post.liked"  src="../../../assets/img/heart_reaction.png" alt="">
+                                <img class="heart-btn" *ngIf="post.liked" src="../../../assets/img/heart_reaction_liked.png" alt="">
+                            </button>
                             <button mat-raised-button class="comment"><img class="comment-btn" src="../../../assets/img/comment_white.png" alt=""></button>
                             <button mat-raised-button class="share"><img class="share-btn" src="../../../assets/img/share_white.png" alt=""></button>
                          </div>

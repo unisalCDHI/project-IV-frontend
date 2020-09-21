@@ -15,14 +15,12 @@ export class HomeComponent implements OnInit {
 
   subs: Subscription[] = [];
   posts: Post[] = [];
-  currentUser: User;
 
-  constructor(private postService: PostService, private userService: UserService, private _sanitizer: DomSanitizer) { }
+  constructor(private postService: PostService, private _sanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
     this.findAll();
     this.pooling();
-    this.getCurrentUser();
   }
 
   pooling() {
@@ -44,22 +42,6 @@ export class HomeComponent implements OnInit {
       this.postService.update(post.id, null).subscribe(res => {
         this.findAll();
       })
-    );
-  }
-
-  isLiked(post: Post) {
-    post.likes.forEach(user => {
-      if (this.currentUser.username === user.username)
-        return true;
-    });
-    return false;
-  }
-
-  getCurrentUser() {
-    this.subs.push(
-      this.userService.findOne(Number(localStorage.getItem('id'))).subscribe(user => {
-        this.currentUser = user;
-      }) 
     );
   }
 
