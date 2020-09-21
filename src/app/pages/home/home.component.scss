@@ -1,6 +1,6 @@
-.container{
+.container {
     border: 2px solid #2c4863;
-    border-radius: 1px; 
+    border-radius: 1px;
 }
 
 .card {
@@ -13,9 +13,11 @@
     box-shadow: inset 0 0 1em rgba(24, 45, 70, 1);
     border-radius: 10px;
     max-width: 350px;
+    margin: 0 0 20px 0;
+    word-wrap: break-word;
 }
 
-.icon{
+.icon {
     display: inline-block;
     height: 50px;
     width: 50px;
@@ -23,36 +25,35 @@
     box-shadow: 0px 0px 2px #888;
     padding: 0.5em 0.6em;
     position: relative;
-
 }
 
-.poster-icon{
-    float:left;
+.poster-icon {
+    float: left;
     margin-top: -20px;
     margin-left: -20px;
     margin-right: 5px;
 }
 
-.poster-address-wrapper{
-    float:left;
-    margin-top:-28px;
+.poster-address-wrapper {
+    float: left;
+    margin-top: -28px;
     margin-left: -5px;
 }
 
-.poster-name-wrapper{
-    float:left;
-    margin-top:-25px;
-    margin-left:8px;
+.poster-name-wrapper {
+    float: left;
+    margin-top: -25px;
+    margin-left: 8px;
     font-size: 21px;
     font-weight: bold;
 }
 
-.post-text{
+.post-text {
     margin-left: 50px;
     width: 300px;
 }
 
-#btn-post{
+#btn-post {
     border-radius: 10px;
     font-size: 18px;
     font-weight: bold;
@@ -61,14 +62,14 @@
     height: 40px;
 }
 
-#btn-attachment{
+#btn-attachment {
     background: transparent;
     box-shadow: 0px 0px 0px transparent;
     border: 0px solid transparent;
     text-shadow: 0px 0px 0px transparent;
 }
 
-#btn-emoji{
+#btn-emoji {
     background: transparent;
     box-shadow: 0px 0px 0px transparent;
     border: 0px solid transparent;
@@ -76,53 +77,53 @@
     margin-right: 350px;
 }
 
-#attach-img{
+#attach-img {
     width: 20px;
     height: 20px;
 }
 
-#emoji-img{
+#emoji-img {
     width: 20px;
     height: 20px;
 }
 
-.post-attachment-img{
+.post-attachment-img {
     width: 325px;
     margin-left: 20px;
 }
 
-.post-img-container{
-    max-width:100%;
-    max-height:100%;
+.post-img-container {
+    max-width: 100%;
+    max-height: 100%;
 }
 
-.react-comment-share{
+.heart-comment-share {
     margin-top: 10px;
 }
 
-.react-btn{
+.heart-btn {
     width: 40px;
     margin-left: 5px;
 }
 
-.comment-btn{
+.comment-btn {
     width: 40px;
     margin-left: 5px;
 }
 
-.share-btn{
+.share-btn {
     width: 40px;
     margin-left: 5px;
 }
 
-.react{
+.heart {
     background: transparent;
     box-shadow: 0px 0px 0px transparent;
     border: 0px solid transparent;
     text-shadow: 0px 0px 0px transparent;
 }
 
-.comment{
+.comment {
     background: transparent;
     box-shadow: 0px 0px 0px transparent;
     border: 0px solid transparent;
@@ -130,10 +131,14 @@
     margin-left: 10px;
 }
 
-.share{
+.share {
     background: transparent;
     box-shadow: 0px 0px 0px transparent;
     border: 0px solid transparent;
     text-shadow: 0px 0px 0px transparent;
     margin-left: 100px;
+}
+
+.liked {
+    opacity: 0.1;
 }
