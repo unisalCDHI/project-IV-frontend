@@ -4,8 +4,8 @@
             <mat-label>Alguma novidade?</mat-label>
             <textarea matInput style="resize: none;" maxlength="500"></textarea>
             <div class="actions-wrapper">
-                <button mat-raised-button id="btn-attachment"><img id="attach-img" src="../../../assets/img/attach-white.png"/></button>
-                <button mat-raised-button id="btn-emoji"><img id="emoji-img" src="../../../assets/img/emoji_yellow.png"/></button>
+                <button mat-raised-button id="btn-attachment"><mat-icon>insert_photo</mat-icon></button>
+                <button mat-raised-button id="btn-emoji"><mat-icon>insert_emoticon</mat-icon></button>
                 <button mat-raised-button color="primary" id="btn-post">Postar</button>
             </div>
             
@@ -38,11 +38,11 @@
                          </div>
                          <div class="react-comment-share">
                             <button mat-raised-button class="heart" (click)="like(post)"> 
-                                <img class="heart-btn" *ngIf="!post.liked"  src="../../../assets/img/heart_reaction.png" alt="">
-                                <img class="heart-btn" *ngIf="post.liked" src="../../../assets/img/heart_reaction_liked.png" alt="">
+                                <mat-icon *ngIf="!post.liked">favorite</mat-icon>
+                                <mat-icon id="favorite" *ngIf="post.liked">favorite</mat-icon>
                             </button>
-                            <button mat-raised-button class="comment"><img class="comment-btn" src="../../../assets/img/comment_white.png" alt=""></button>
-                            <button mat-raised-button class="share"><img class="share-btn" src="../../../assets/img/share_white.png" alt=""></button>
+                            <button mat-raised-button class="comment"><mat-icon>comment</mat-icon></button>
+                            <button mat-raised-button class="share"><mat-icon >wifi_protected_setup</mat-icon></button>
                          </div>
                         
                     </div>

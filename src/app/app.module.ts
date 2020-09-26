@@ -17,6 +17,7 @@ import { NotificationComponent } from './pages/notification/notification.compone
 import { MessagesComponent } from './pages/messages/messages.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { TeamComponent } from './pages/team/team.component';
+import {MatIconModule} from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { TeamComponent } from './pages/team/team.component';
     BrowserAnimationsModule,
     AngularMaterialModule,
     FlexLayoutModule,
-    Interceptor
+    Interceptor,
+    MatIconModule
   ],
   providers: [
     MatSnackBar
