@@ -1,20 +1,26 @@
 <div class="container">
     <div>
-        <mat-form-field appearance="fill" style="background-color: rgb(24, 45, 70); width: 100%;">
-            <mat-label>Alguma novidade?</mat-label>
-            <textarea matInput style="resize: none;" maxlength="500"></textarea>
-            <div class="actions-wrapper">
-                <button mat-raised-button id="btn-attachment"><mat-icon>insert_photo</mat-icon></button>
-                <button mat-raised-button id="btn-emoji"><mat-icon>insert_emoticon</mat-icon></button>
-                <button mat-raised-button color="primary" id="btn-post">Postar</button>
-            </div>
-            
-        </mat-form-field>
-        
+
+        <div class="actions-wrapper">
+            <form [formGroup]="postForm" (ngSubmit)="post()">
+                <mat-form-field appearance="fill" style="background-color: rgb(24, 45, 70); width: 100%;">
+                    <mat-label>Alguma novidade?</mat-label>
+                    <textarea formControlName="body" matInput style="resize: none;" maxlength="500"></textarea>
+                </mat-form-field>
+                <button mat-raised-button color="primary" type="submit" id="btn-post">Postar</button>
+            </form>
+            <button mat-raised-button id="btn-attachment" type="file"> <mat-icon>insert_photo</mat-icon> </button>
+            <button mat-raised-button id="btn-emoji">
+                <mat-icon>insert_emoticon</mat-icon>
+            </button>
+        </div>
+
+
+
     </div>
     <br>
     <div class="posts">
-        <div *ngFor="let post of posts"  class="card">
+        <div *ngFor="let post of posts" class="card">
             <mat-card>
                 <mat-card-content>
                     <div style="min-height: 100px;">
@@ -22,33 +28,37 @@
                             <img class="icon" src="../../../assets/img/user.png" />
                         </div>
                         <div class="poster-address-wrapper">
-                           <a style="opacity:0.5; color:white"> @{{post.owner.username}} </a>
+                            <a style="opacity:0.5; color:white"> @{{post.owner.username}} </a>
                         </div>
                         <br>
                         <div class="poster-name-wrapper">
                             <a style="color:white"> {{post.owner.name}} </a>
-                         </div>
-                         <div class="post-text">
+                        </div>
+                        <div class="post-text">
                             <p style="padding: 5px;">
                                 {{post.body}}
                             </p>
-                         </div>
-                         <div *ngIf="post.image !== ''"  class="post-attachment-img">
-                            <img [src]="post.image" class="post-img-container"/>
-                         </div>
-                         <div class="react-comment-share">
-                            <button mat-raised-button class="heart" (click)="like(post)"> 
+                        </div>
+                        <div *ngIf="post.image !== ''" class="post-attachment-img">
+                            <img [src]="post.image" class="post-img-container" />
+                        </div>
+                        <div class="react-comment-share">
+                            <button mat-raised-button class="heart" (click)="like(post)">
                                 <mat-icon *ngIf="!post.liked">favorite</mat-icon>
                                 <mat-icon id="favorite" *ngIf="post.liked">favorite</mat-icon>
                             </button>
-                            <button mat-raised-button class="comment"><mat-icon>comment</mat-icon></button>
-                            <button mat-raised-button class="share"><mat-icon >wifi_protected_setup</mat-icon></button>
-                         </div>
-                        
+                            <button mat-raised-button class="comment">
+                                <mat-icon>comment</mat-icon>
+                            </button>
+                            <button mat-raised-button class="share">
+                                <mat-icon>wifi_protected_setup</mat-icon>
+                            </button>
+                        </div>
+
                     </div>
                 </mat-card-content>
             </mat-card>
         </div>
-        
+
     </div>
 </div>
