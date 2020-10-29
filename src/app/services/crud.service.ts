@@ -34,4 +34,13 @@ export abstract class CrudService<T, ID> {
       return this._http.get<T[]>(this._base + '/' + id);
     return this._http.get<T[]>(this._base);
   }
+
+  findAllSearch(name): Observable<T[]> {
+    const options = {
+      params: new HttpParams().set('name', String(name))
+    };
+    return this._http.get<T[]>(this._base, options);
+  }
+
+
 }

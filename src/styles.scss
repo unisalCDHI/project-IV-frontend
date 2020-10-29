@@ -23,17 +23,21 @@ $dark-theme: mat-dark-theme(
 
 html,
 body {
-    height: 100%;
     margin: 0;
     padding: 0;
 }
+
+.mat-grid-tile .mat-figure {
+    display: block !important;
+}
+
 body {
     background-attachment: fixed;
     background-color: #15202b;
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
-    min-height: 100vh;
+    min-height: 80vh;
     font-family: "Roboto", sans-serif;
 }
 
@@ -62,10 +66,22 @@ body {
 }
 
 .container {
-    margin: 80px 10% 80px 35%;
+    margin: 80px 0 80px 35%;
     min-height: 200px;
     max-width: 600px;
     width: 80%;
+    background: #15202b;
+    border-radius: 5px;
+    .posts {
+        padding: 50px;
+        box-shadow: inset 2.5px 5px rgb(24, 45, 70);
+    }
+}
+
+.container2 {
+    margin: 80px 0 0 35%;
+    height: 85vh;
+    width: 65%;
     background: #15202b;
     border-radius: 5px;
     .posts {
@@ -144,9 +160,6 @@ body {
 }
 
 html,
-body {
-    height: 100%;
-}
 body {
     margin: 0;
     font-family: Roboto, "Helvetica Neue", sans-serif;

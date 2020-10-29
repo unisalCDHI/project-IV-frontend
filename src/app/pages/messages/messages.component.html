@@ -1,29 +1,43 @@
-<div class="container">
+<div class="container2">
+    <mat-grid-list cols="2" rowHeight="1:1">
+        <mat-grid-tile>
+            <form autocomplete="off" class="search-box" style="margin-right: 8px;" [formGroup]="searchForm" (ngSubmit)="searchName()" >
+                <mat-form-field appearance="fill" style="background-color: rgb(24, 45, 70); width: 100%;">
+                    <mat-label>Digite o nome da pessoa...</mat-label>
+                    <input matInput style="resize: none; height: 30px;" formControlName="name"/>
+                    <div id="btn-search-icon">
+                        <button type="submit" id="button-search-btn">
+                            <mat-icon>search</mat-icon>
+                        </button>
+                    </div>
+                </mat-form-field>
+            </form>
 
-    <div class="search-box" style="margin-right: 8px;">
-        <mat-form-field appearance="fill" style="background-color: rgb(24, 45, 70); width: 100%;">
-            <mat-label>Digite o nome da pessoa...</mat-label>
-            <textarea matInput style="resize: none;"></textarea>
-            <div id="btn-search-icon">
-                <button id="button-search-btn"> <mat-icon>search</mat-icon> </button>
-            </div>    
-        </mat-form-field>
-    </div>
-
-    <div class="people">
-
-        <div class="person">
-
-            <div class="icon-wrapper">
-                <img class="icon" src="../../../assets/img/user.png" />
+            <div *ngFor="let user of users"  class="people">
+                <div class="person">
+                    <div *ngIf="user.avatar !== '' && user.avatar !== null" class="icon-wrapper">
+                        <img class="icon" [src]="user.avatar"/>
+                    </div>
+                    <div class="data-wrapper">
+                        <a class="adress" style="opacity: 0.5;">@{{ user.username }}</a>
+                        <p class="name">{{ user.name }}</p>
+                    </div>
+                </div>
             </div>
-            
-            <div class="data-wrapper">
-                <a class="adress" style="opacity: 0.5;">@Unknown_User</a>
-                <p class="name">Unknown User</p>
+        </mat-grid-tile>
+        <mat-grid-tile>
+            <div class="search-box" style="margin-right: 8px;">
+                <mat-form-field appearance="fill" style="background-color: rgb(24, 45, 70); width: 100%;">
+                    <mat-label>Digite o nome da pessoa...</mat-label>
+                    <textarea matInput style="resize: none;"></textarea>
+                    <div id="btn-search-icon">
+                        <button id="button-search-btn">
+                            <mat-icon>search</mat-icon>
+                        </button>
+                    </div>
+                </mat-form-field>
             </div>
-        </div>     
+        </mat-grid-tile>
 
-    </div>
-
+    </mat-grid-list>
 </div>
