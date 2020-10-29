@@ -4,7 +4,7 @@ import { User } from './../../shared/models/user';
 import { UserService } from './../../services/user.service';
 import { Post } from './../../shared/models/post';
 import { PostService } from './../../services/post.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { DomSanitizer } from '@angular/platform-browser';
 
@@ -13,11 +13,13 @@ import { DomSanitizer } from '@angular/platform-browser';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
   selectedFile: File = null;
   subs: Subscription[] = [];
   posts: Post[] = [];
   postForm: FormGroup;
+  poolingRequest: any;
+  file: any;
 
   constructor(private postService: PostService, private _sanitizer: DomSanitizer, private fb: FormBuilder) { }
 
@@ -35,12 +37,13 @@ export class HomeComponent implements OnInit {
   }
 
   pooling() {
-    setInterval(() => {
+    this.poolingRequest = setInterval(() => {
       this.findAll();
     }, 5000);
   }
 
   findAll() {
+    console.log(this.file);
     this.subs.push(
       this.postService.findAll().subscribe(res => {
         this.posts = res;
@@ -57,6 +60,7 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnDestroy() {
+    clearInterval(this.poolingRequest);
     this.subs.forEach(sub => {
       sub.unsubscribe();
     })
