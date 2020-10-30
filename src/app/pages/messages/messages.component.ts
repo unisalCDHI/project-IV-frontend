@@ -1,27 +1,45 @@
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { User } from './../../shared/models/user';
+import { MessageService } from './../../services/message.service';
 import { UserService } from './../../services/user.service';
-import { Component, OnInit } from '@angular/core';
+import { Message } from './../../shared/models/message';
+import { User } from './../../shared/models/user';
 
 @Component({
   selector: 'app-messages',
   templateUrl: './messages.component.html',
   styleUrls: ['./messages.component.scss']
 })
-export class MessagesComponent implements OnInit {
+export class MessagesComponent implements OnInit, OnDestroy {
+
+  @ViewChild('messageDiv') private messageDiv: ElementRef;
+
+  searchForm: FormGroup;
+  messageForm: FormGroup;
 
   users: User[] = [];
-  searchForm: FormGroup;
+  currentUser: User = null;
+  messages: Message[] = [];
+  currentRequest: any;
 
-  constructor(private userService: UserService, private formBuilder: FormBuilder) { }
+  messagesLength: number = 0;
+
+  constructor(private userService: UserService, private messageService: MessageService, private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
-    this.buildSearchForm();
+    this.buildForm();
+    this.searchName();
   }
 
-  buildSearchForm() {
+  buildForm() {
     this.searchForm = this.formBuilder.group({
-      name: [null]
+      name: ['']
+    });
+
+    this.messageForm = this.formBuilder.group({
+      body: [''],
+      image: [''],
+      recipientId: [null]
     });
   }
 
@@ -31,4 +49,43 @@ export class MessagesComponent implements OnInit {
     })
   }
 
+  changeToUser(user) {
+    this.currentUser = user;
+    clearInterval(this.currentRequest);
+    this.findAll(user.id);
+    this.pooling(user.id);
+  }
+
+  pooling(userId) {
+    this.currentRequest = setInterval(() => {
+      this.findAll(userId);
+    }, 1000);
+  }
+
+  findAll(userId) {
+    this.messageService.findAll(userId).subscribe(res => {
+      this.messages = res;
+    });
+  }
+
+  scrollDown() {
+    if (this.messagesLength < this.messages.length) {
+      this.messageDiv.nativeElement.scrollTop = this.messageDiv.nativeElement.scrollHeight;
+    }
+    this.messagesLength = this.messages.length;
+  }
+
+  ngOnDestroy() {
+    clearInterval(this.currentRequest);
+  }
+
+  sendMessage() {
+    this.messageForm.value.recipientId = this.currentUser.id;
+    this.messageService.send(this.messageForm.value).subscribe(res => {
+      this.messageForm.reset();
+      this.findAll(this.currentUser.id);
+    }, error => {
+      // todo
+    });
+  }
 }

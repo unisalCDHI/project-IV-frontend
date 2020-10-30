@@ -10,6 +10,54 @@
     margin-top: 5px;
     margin-left: 8px;
     overflow-y: auto;
+    margin-right: 8px;
+    color: white;
+}
+
+.message-container {
+    min-height: 600px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    border: 5px solid #6a8297;
+    border-radius: 4px;
+    padding-bottom: 50px;
+}
+
+.message-box {
+    width: 100%;
+    margin-top: 30px;
+    // position: absolute;
+    bottom: 0;
+    color: white;
+}
+
+#messages {
+    overflow-y: scroll;
+    max-height: 60%;
+    div {
+        word-wrap: break-word;
+    }
+}
+
+.message-body-left {
+    text-align: left;
+    font-size: 17px;
+    border-radius: 20px 20px 20px 0;
+    margin: 12px 50px 0 10px;
+    background-color: rgba($color: rgb(47, 51, 54), $alpha: 1);
+    color: white;
+    padding: 10px 20px 10px 20px;
+}
+
+.message-body-right {
+    text-align: right;
+    font-size: 17px;
+    border-radius: 20px 20px 0 20px;
+    margin: 12px 10px 0 50px;
+    background-color: rgba($color: #124d7e, $alpha: 1);
+    color: white;
+    padding: 10px 20px 10px 20px;
 }
 
 #search-btn{
@@ -32,8 +80,14 @@
 .person{
     margin-top: 10px;
     margin-left: 12px;
+    padding: 20px 10px 10px 20px;
     width: 93%;
     height: 70px;
+}
+
+.person:hover {
+    cursor: pointer;
+    background-color: rgba($color: #000000, $alpha: 0.3);
 }
 
 .icon{

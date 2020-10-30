@@ -1,10 +1,10 @@
 <div class="container2">
-    <mat-grid-list cols="2" rowHeight="1:1">
+    <mat-grid-list cols="2" rowHeight="100%">
         <mat-grid-tile>
-            <form autocomplete="off" class="search-box" style="margin-right: 8px;" [formGroup]="searchForm" (ngSubmit)="searchName()" >
+            <form autocomplete="off" class="search-box" [formGroup]="searchForm" (ngSubmit)="searchName()">
                 <mat-form-field appearance="fill" style="background-color: rgb(24, 45, 70); width: 100%;">
                     <mat-label>Digite o nome da pessoa...</mat-label>
-                    <input matInput style="resize: none; height: 30px;" formControlName="name"/>
+                    <input matInput style="resize: none; height: 30px;" formControlName="name" (keyup)="searchName()"/>
                     <div id="btn-search-icon">
                         <button type="submit" id="button-search-btn">
                             <mat-icon>search</mat-icon>
@@ -14,7 +14,7 @@
             </form>
 
             <div *ngFor="let user of users"  class="people">
-                <div class="person">
+                <div class="person" (click)="changeToUser(user)" >
                     <div *ngIf="user.avatar !== '' && user.avatar !== null" class="icon-wrapper">
                         <img class="icon" [src]="user.avatar"/>
                     </div>
@@ -25,18 +25,34 @@
                 </div>
             </div>
         </mat-grid-tile>
-        <mat-grid-tile>
-            <div class="search-box" style="margin-right: 8px;">
+        <mat-grid-tile class="message-container">
+            <div *ngIf="currentUser !== null"  class="person">
+                <div *ngIf="currentUser.avatar !== '' && currentUser.avatar !== null" class="icon-wrapper">
+                    <img class="icon" [src]="currentUser.avatar"/>
+                </div>
+                <div class="data-wrapper">
+                    <a class="adress" style="opacity: 0.5;">@{{ currentUser.username }}</a>
+                    <p class="name">{{ currentUser.name }}</p>
+                </div>
+            </div>
+            <div #messageDiv id="messages">
+                <div [className]="msg.sender.id == currentUser.id ? 'message-body-left' : 'message-body-right'" *ngFor="let msg of messages; let i = index" >
+                    <img *ngIf="msg.image !== '' && msg.image !== null"  [src]="msg.image" alt="">
+                    <p align="left">{{ msg.body }}</p>
+                    {{i ? scrollDown() : ''}}
+                </div>
+            </div>
+            <form *ngIf="currentUser !== null" class="message-box" [formGroup]="messageForm" (ngSubmit)="sendMessage()">
                 <mat-form-field appearance="fill" style="background-color: rgb(24, 45, 70); width: 100%;">
-                    <mat-label>Digite o nome da pessoa...</mat-label>
-                    <textarea matInput style="resize: none;"></textarea>
+                    <mat-label>Digite sua mensagem (max 255)</mat-label>
+                    <textarea matInput style="resize: none;" maxlength="255" formControlName="body"></textarea>
                     <div id="btn-search-icon">
-                        <button id="button-search-btn">
-                            <mat-icon>search</mat-icon>
+                        <button type="submit" id="button-search-btn" disable="body == ''">
+                            <mat-icon>send</mat-icon>
                         </button>
                     </div>
                 </mat-form-field>
-            </div>
+            </form>
         </mat-grid-tile>
 
     </mat-grid-list>
