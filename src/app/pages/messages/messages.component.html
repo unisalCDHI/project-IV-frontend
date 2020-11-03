@@ -39,7 +39,7 @@
                 <div [className]="msg.sender.id == currentUser.id ? 'message-body-left' : 'message-body-right'" *ngFor="let msg of messages; let i = index" >
                     <img *ngIf="msg.image !== '' && msg.image !== null"  [src]="msg.image" alt="">
                     <p align="left">{{ msg.body }}</p>
-                    {{i ? scrollDown() : ''}}
+                    {{i && scrollIt ? scrollDown() : ''}}
                 </div>
             </div>
             <form *ngIf="currentUser !== null" class="message-box" [formGroup]="messageForm" (ngSubmit)="sendMessage()">

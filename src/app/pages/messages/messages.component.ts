@@ -21,6 +21,7 @@ export class MessagesComponent implements OnInit, OnDestroy {
   currentUser: User = null;
   messages: Message[] = [];
   currentRequest: any;
+  scrollIt: boolean = false;
 
   messagesLength: number = 0;
 
@@ -50,6 +51,7 @@ export class MessagesComponent implements OnInit, OnDestroy {
   }
 
   changeToUser(user) {
+    this.scrollIt = true;
     this.currentUser = user;
     clearInterval(this.currentRequest);
     this.findAll(user.id);
@@ -58,6 +60,7 @@ export class MessagesComponent implements OnInit, OnDestroy {
 
   pooling(userId) {
     this.currentRequest = setInterval(() => {
+      this.scrollIt = false;
       this.findAll(userId);
     }, 1000);
   }
@@ -69,10 +72,9 @@ export class MessagesComponent implements OnInit, OnDestroy {
   }
 
   scrollDown() {
-    if (this.messagesLength < this.messages.length) {
       this.messageDiv.nativeElement.scrollTop = this.messageDiv.nativeElement.scrollHeight;
-    }
-    this.messagesLength = this.messages.length;
+
+    // this.messagesLength = this.messages.length;
   }
 
   ngOnDestroy() {
@@ -82,6 +84,7 @@ export class MessagesComponent implements OnInit, OnDestroy {
   sendMessage() {
     this.messageForm.value.recipientId = this.currentUser.id;
     this.messageService.send(this.messageForm.value).subscribe(res => {
+      this.scrollIt = true;
       this.messageForm.reset();
       this.findAll(this.currentUser.id);
     }, error => {
