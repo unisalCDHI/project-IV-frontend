@@ -27,16 +27,67 @@
 .message-box {
     width: 100%;
     margin-top: 30px;
-    // position: absolute;
+    position: absolute;
     bottom: 0;
     color: white;
 }
 
+.hide-deleted{
+    display: none;
+}
+
+.hide {
+    display: none;
+    float: left;
+    margin-left: -30%;
+    cursor: pointer;
+}
+
+.image-selected {
+    overflow: hidden;
+    text-align: center;
+    img {
+        max-height: 400px;
+        max-width: 100%;
+        width: auto;
+        margin-bottom: 40px;
+    }
+}
+
+.message-container-right:hover > .message-body-right .hide {
+    display: block;
+}
+
+.image-input {
+    margin: 10px;
+    position: absolute;
+    bottom: 13px;
+    color: white;
+    display: flex;
+
+    .remove-image-button {
+        padding: 5px;
+        :hover {
+            cursor: pointer;
+        }
+    }
+}
+
 #messages {
-    overflow-y: scroll;
-    max-height: 60%;
+    overflow-y: auto;
+    position: absolute;
+    width: 100%;
+    min-height: 365px;
+    height: calc(85vh - 30px - 110px - 150px);
     div {
         word-wrap: break-word;
+    }
+    .message-container-right:hover, .message-container-right:hover {
+        background-color: rgba($color: #000000, $alpha: 0.3);
+    }
+    img {
+        width: 100%;
+        border-radius: 5px;
     }
 }
 
@@ -44,20 +95,28 @@
     text-align: left;
     font-size: 17px;
     border-radius: 20px 20px 20px 0;
-    margin: 12px 50px 0 10px;
+    margin: 12px 20% 0 10px;
     background-color: rgba($color: rgb(47, 51, 54), $alpha: 1);
     color: white;
-    padding: 10px 20px 10px 20px;
+    padding: 10px 20px 1px 20px;
 }
 
 .message-body-right {
     text-align: right;
     font-size: 17px;
     border-radius: 20px 20px 0 20px;
-    margin: 12px 10px 0 50px;
+    margin: 12px 10px 0 20%;
     background-color: rgba($color: #124d7e, $alpha: 1);
     color: white;
-    padding: 10px 20px 10px 20px;
+    padding: 10px 20px 1px 20px;
+}
+
+.spinner {
+    height: 20px;
+}
+
+.deleted-message {
+    color: grey;
 }
 
 #search-btn{

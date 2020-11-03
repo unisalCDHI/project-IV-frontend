@@ -7,4 +7,6 @@ export class Message {
     public recipient: User;
     public image: string;
     public createdData: any;
+    public deleted: boolean;
+    public updated: boolean;
 }

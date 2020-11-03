@@ -18,4 +18,8 @@ import { CrudService } from './crud.service';
     send(msg: NewMessage): Observable<any> {
       return this._http.post<any>(this._base, msg);
     }
+
+    remove(userId: number, msgId: number): Observable<any> {
+      return this._http.delete<any>(this._base + '/' + userId + '/' + msgId);
+    }
 }
