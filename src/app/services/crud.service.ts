@@ -22,6 +22,10 @@ export abstract class CrudService<T, ID> {
     return this._http.get<T>(this._base + '/' + id);
   }
 
+  delete(id: ID): Observable<T> {
+    return this._http.delete<T>(this._base + '/' + id);
+  }
+
   findByPage(page = 0, size = 1000): Observable<PageableResponse<T>> {
     const options = {
       params: new HttpParams().set('page', String(page)).set('size', String(size))
@@ -33,5 +37,12 @@ export abstract class CrudService<T, ID> {
     if (id !== undefined)
       return this._http.get<T[]>(this._base + '/' + id);
     return this._http.get<T[]>(this._base);
+  }
+
+  findAllSearch(name): Observable<T[]> {
+    const options = {
+      params: new HttpParams().set('name', String(name))
+    };
+    return this._http.get<T[]>(this._base, options);
   }
 }

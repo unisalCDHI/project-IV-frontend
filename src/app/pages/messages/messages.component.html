@@ -1,29 +1,86 @@
-<div class="container">
+<div class="container2">
+    <mat-grid-list cols="2" rowHeight="100%">
+        <mat-grid-tile>
+            <form autocomplete="off" class="search-box" [formGroup]="searchForm" (ngSubmit)="searchName()">
+                <mat-form-field appearance="fill" style="background-color: rgb(24, 45, 70); width: 100%;">
+                    <mat-label>Digite o nome da pessoa...</mat-label>
+                    <input matInput style="resize: none; height: 30px;" formControlName="name" (keyup)="searchName()" />
+                    <div id="btn-search-icon">
+                        <button type="submit" id="button-search-btn">
+                            <mat-icon>search</mat-icon>
+                        </button>
+                    </div>
+                </mat-form-field>
+            </form>
 
-    <div class="search-box" style="margin-right: 8px;">
-        <mat-form-field appearance="fill" style="background-color: rgb(24, 45, 70); width: 100%;">
-            <mat-label>Digite o nome da pessoa...</mat-label>
-            <textarea matInput style="resize: none;"></textarea>
-            <div id="btn-search-icon">
-                <button id="button-search-btn"> <img id="search-btn" src="../../../assets/img/search-btn.png"> </button>
-            </div>    
-        </mat-form-field>
-    </div>
-
-    <div class="people">
-
-        <div class="person">
-
-            <div class="icon-wrapper">
-                <img class="icon" src="../../../assets/img/user.png" />
+            <div *ngFor="let user of users" class="people">
+                <div class="person" (click)="changeToUser(user)">
+                    <div *ngIf="user.avatar !== '' && user.avatar !== null" class="icon-wrapper">
+                        <img class="icon" [src]="user.avatar" />
+                    </div>
+                    <div class="data-wrapper">
+                        <a class="adress" style="opacity: 0.5;">@{{ user.username }}</a>
+                        <p class="name">{{ user.name }}</p>
+                    </div>
+                </div>
             </div>
-            
-            <div class="data-wrapper">
-                <a class="adress" style="opacity: 0.5;">@Unknown_User</a>
-                <p class="name">Unknown User</p>
+        </mat-grid-tile>
+        <mat-grid-tile class="message-container">
+            <div *ngIf="currentUser !== null" class="person">
+                <div *ngIf="currentUser.avatar !== '' && currentUser.avatar !== null" class="icon-wrapper">
+                    <img class="icon" [src]="currentUser.avatar" />
+                </div>
+                <div class="data-wrapper">
+                    <a class="adress" style="opacity: 0.5;">@{{ currentUser.username }}</a>
+                    <p class="name">{{ currentUser.name }}</p>
+                </div>
             </div>
-        </div>     
+            <div #messageDiv id="messages">
+                <div [className]="msg.sender.id == currentUser.id ? 'message-container-left' : 'message-container-right'"
+                    *ngFor="let msg of messages; let i = index">
+                    <div [className]="msg.sender.id == currentUser.id ? 'message-body-left' : 'message-body-right'">
+                        <mat-icon [className]="!msg.deleted ? 'hide' : 'hide-deleted'" (click)="deleteMessage(msg)">
+                            delete_forever</mat-icon>
+                        <img *ngIf="msg.image !== '' && msg.image !== null" [src]="msg.image" alt="">
+                        <p *ngIf="!msg.deleted; else elseBlock;" align="left">{{ msg.body }}</p>
+                        {{i && scrollIt ? scrollDown() : ''}}
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="currentUser !== null">
+                <form class="message-box" [formGroup]="messageForm" (ngSubmit)="sendMessage()">
+                    <mat-form-field appearance="fill" style="background-color: rgb(24, 45, 70); width: 100%;">
+                        <mat-label>Digite sua mensagem (max 255)</mat-label>
+                        <textarea matInput style="resize: none; height: 75px;" maxlength="255"
+                            formControlName="body" (keyup.enter)="sendMessage()"></textarea>
+                        <div id="btn-search-icon">
+                            <div *ngIf="loading">
+                                <mat-spinner [diameter]="30"></mat-spinner>
+                            </div>
+                            <button *ngIf="!loading" type="submit" id="button-search-btn">
+                                <mat-icon>send</mat-icon>
+                            </button>
+                        </div>
+                        <div *ngIf="imgBase64 !== '' && imgBase64 !== null" class="image-selected">
+                            <img [src]="imgBase64" alt="">
+                        </div>
+                    </mat-form-field>
+                </form>
+                <div class="image-input">
+                    <input #imageInput type="file" accept="image/*" onclick="this.value=null" hidden
+                        (change)="changeListener($event)">
+                    <button mat-flat-button type="button" (click)="imageInput.click()">Enviar imagem/GIF</button>
+                    <div class="remove-image-button">
+                        <mat-icon *ngIf="imgBase64 !== '' && imgBase64 !== null" (click)="clearImage()">
+                            delete</mat-icon>
+                    </div>
+                </div>
+            </div>
+        </mat-grid-tile>
 
-    </div>
-
+    </mat-grid-list>
 </div>
+
+<ng-template #elseBlock>
+    <p class="deleted-message" align="left"><strong>&Oslash;</strong> Essa mensagem foi apagada</p>
+</ng-template>

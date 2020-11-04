@@ -1,20 +1,26 @@
 <div class="container">
     <div>
-        <mat-form-field appearance="fill" style="background-color: rgb(24, 45, 70); width: 100%;">
-            <mat-label>Alguma novidade?</mat-label>
-            <textarea matInput style="resize: none;"></textarea>
-            <div class="actions-wrapper">
-                <button mat-raised-button id="btn-attachment"><img id="attach-img" src="../../../assets/img/attach-white.png"/></button>
-                <button mat-raised-button id="btn-emoji"><img id="emoji-img" src="../../../assets/img/emoji_yellow.png"/></button>
-                <button mat-raised-button color="primary" id="btn-post">Postar</button>
-            </div>
-            
-        </mat-form-field>
-        
+
+        <div class="actions-wrapper">
+            <form [formGroup]="postForm" (ngSubmit)="post()">
+                <mat-form-field appearance="fill" style="background-color: rgb(24, 45, 70); width: 100%;">
+                    <mat-label>Alguma novidade?</mat-label>
+                    <textarea formControlName="body" matInput style="resize: none;" maxlength="500"></textarea>
+                </mat-form-field>
+                <button mat-raised-button type="submit" id="btn-post">Postar</button>
+            </form>
+            <button mat-raised-button id="btn-attachment" type="file"> <mat-icon>insert_photo</mat-icon> </button>
+            <button mat-raised-button id="btn-emoji">
+                <mat-icon>insert_emoticon</mat-icon>
+            </button>
+        </div>
+
+
+
     </div>
     <br>
     <div class="posts">
-        <div class="card">
+        <div *ngFor="let post of posts" class="card">
             <mat-card>
                 <mat-card-content>
                     <div style="min-height: 100px;">
@@ -22,34 +28,37 @@
                             <img class="icon" src="../../../assets/img/user.png" />
                         </div>
                         <div class="poster-address-wrapper">
-                           <a style="opacity:0.5; color:white"> @Unknown_User </a>
+                            <a style="opacity:0.5; color:white"> @{{post.owner.username}} </a>
                         </div>
                         <br>
                         <div class="poster-name-wrapper">
-                            <a style="color:white"> Unknown User </a>
-                         </div>
-                         <div class="post-text">
+                            <a style="color:white"> {{post.owner.name}} </a>
+                        </div>
+                        <div class="post-text">
                             <p style="padding: 5px;">
-                                Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                                 Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
-                                 It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
-                                It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, 
-                                and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                                {{post.body}}
                             </p>
-                         </div>
-                         <div class="post-attachment-img">
-                            <img src="../../../assets/img/meeting.jpg" class="post-img-container"/>
-                         </div>
-                         <div class="react-comment-share">
-                            <button mat-raised-button class="react"> <img class="react-btn" src="../../../assets/img/heart_reaction.png" alt=""></button>
-                            <button mat-raised-button class="comment"><img class="comment-btn" src="../../../assets/img/comment_white.png" alt=""></button>
-                            <button mat-raised-button class="share"><img class="share-btn" src="../../../assets/img/share_white.png" alt=""></button>
-                         </div>
-                        
+                        </div>
+                        <div *ngIf="post.image !== ''" class="post-attachment-img">
+                            <img [src]="post.image" class="post-img-container" />
+                        </div>
+                        <div class="react-comment-share">
+                            <button mat-raised-button class="heart" (click)="like(post)">
+                                <mat-icon *ngIf="!post.liked">favorite</mat-icon>
+                                <mat-icon id="favorite" *ngIf="post.liked">favorite</mat-icon>
+                            </button>
+                            <button mat-raised-button class="comment">
+                                <mat-icon>comment</mat-icon>
+                            </button>
+                            <button mat-raised-button class="share">
+                                <mat-icon>wifi_protected_setup</mat-icon>
+                            </button>
+                        </div>
+
                     </div>
                 </mat-card-content>
             </mat-card>
         </div>
-        
+
     </div>
 </div>

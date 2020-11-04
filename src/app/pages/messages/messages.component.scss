@@ -1,0 +1,175 @@
+.container{
+    height: 100%; 
+    border: 2px solid #2c4863;
+    border-radius: 1px;  
+}
+
+.search-box{
+    border: 5px solid #6a8297;
+    border-radius: 4px;
+    margin-top: 5px;
+    margin-left: 8px;
+    overflow-y: auto;
+    margin-right: 8px;
+    color: white;
+}
+
+.message-container {
+    min-height: 600px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    border: 5px solid #6a8297;
+    border-radius: 4px;
+    padding-bottom: 50px;
+}
+
+.message-box {
+    width: 100%;
+    margin-top: 30px;
+    position: absolute;
+    bottom: 0;
+    color: white;
+}
+
+.hide-deleted{
+    display: none;
+}
+
+.hide {
+    display: none;
+    float: left;
+    margin-left: -30%;
+    cursor: pointer;
+}
+
+.image-selected {
+    overflow: hidden;
+    text-align: center;
+    img {
+        max-height: 400px;
+        max-width: 100%;
+        width: auto;
+        margin-bottom: 40px;
+    }
+}
+
+.message-container-right:hover > .message-body-right .hide {
+    display: block;
+}
+
+.image-input {
+    margin: 10px;
+    position: absolute;
+    bottom: 13px;
+    color: white;
+    display: flex;
+
+    .remove-image-button {
+        padding: 5px;
+        :hover {
+            cursor: pointer;
+        }
+    }
+}
+
+#messages {
+    overflow-y: auto;
+    position: absolute;
+    width: 100%;
+    min-height: 365px;
+    height: calc(85vh - 30px - 110px - 150px);
+    div {
+        word-wrap: break-word;
+    }
+    .message-container-right:hover, .message-container-right:hover {
+        background-color: rgba($color: #000000, $alpha: 0.3);
+    }
+    img {
+        width: 100%;
+        border-radius: 5px;
+    }
+}
+
+.message-body-left {
+    text-align: left;
+    font-size: 17px;
+    border-radius: 20px 20px 20px 0;
+    margin: 12px 20% 0 10px;
+    background-color: rgba($color: rgb(47, 51, 54), $alpha: 1);
+    color: white;
+    padding: 10px 20px 1px 20px;
+}
+
+.message-body-right {
+    text-align: right;
+    font-size: 17px;
+    border-radius: 20px 20px 0 20px;
+    margin: 12px 10px 0 20%;
+    background-color: rgba($color: #124d7e, $alpha: 1);
+    color: white;
+    padding: 10px 20px 1px 20px;
+}
+
+.spinner {
+    height: 20px;
+}
+
+.deleted-message {
+    color: grey;
+}
+
+#search-btn{
+    margin-top: 3px;
+    width: 40px;
+    height: 40px;
+}
+
+#button-search-btn{
+    background: transparent;
+    box-shadow: 0px 0px 0px transparent;
+    border: 0px solid transparent;
+    text-shadow: 0px 0px 0px transparent;
+}
+
+#btn-search-icon{
+    float: right;
+}
+
+.person{
+    margin-top: 10px;
+    margin-left: 12px;
+    padding: 20px 10px 10px 20px;
+    width: 93%;
+    height: 70px;
+}
+
+.person:hover {
+    cursor: pointer;
+    background-color: rgba($color: #000000, $alpha: 0.3);
+}
+
+.icon{
+    display: inline-block;
+    height: 50px;
+    width: 50px;
+    border-radius: 60px;
+    box-shadow: 0px 0px 2px #888;
+    padding: 0.5em 0.6em;
+}
+
+.icon-wrapper{
+    float: left;
+}
+
+.data-wrapper{
+    float: left;
+    color: white;
+}
+
+.name{
+    margin-left: 8px;
+    margin-top: 2px;
+    font-size: 25px;
+    font-weight: bold;
+}
