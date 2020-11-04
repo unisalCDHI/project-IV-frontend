@@ -52,7 +52,7 @@
                     <mat-form-field appearance="fill" style="background-color: rgb(24, 45, 70); width: 100%;">
                         <mat-label>Digite sua mensagem (max 255)</mat-label>
                         <textarea matInput style="resize: none; height: 75px;" maxlength="255"
-                            formControlName="body"></textarea>
+                            formControlName="body" (keyup.enter)="sendMessage()"></textarea>
                         <div id="btn-search-icon">
                             <div *ngIf="loading">
                                 <mat-spinner [diameter]="30"></mat-spinner>
