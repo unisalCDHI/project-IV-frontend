@@ -80,7 +80,7 @@ export class MessagesComponent implements OnInit, OnDestroy {
     this.currentRequest = setInterval(() => {
       this.scrollIt = false;
       this.findAll(userId, true);
-    }, 1000);
+    }, 5000);
   }
 
   findAll(userId, pooled = false) {
