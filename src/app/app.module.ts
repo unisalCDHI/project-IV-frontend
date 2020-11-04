@@ -13,10 +13,14 @@ import { LoginComponent } from './pages/account/login/login.component';
 import { RegisterComponent } from './pages/account/register/register.component';
 import { Interceptor } from './services/interceptor.module';
 import { MenuComponent } from './shared/components/menu/menu.component';
+import { ConfirmDialogComponent } from './shared/components/dialog-confirmation/confirm-dialog.component';
 import { NotificationComponent } from './pages/notification/notification.component';
 import { MessagesComponent } from './pages/messages/messages.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { TeamComponent } from './pages/team/team.component';
+import {MatIconModule} from '@angular/material/icon';
+import { MatDialogModule } from '@angular/material/dialog';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -25,6 +29,7 @@ import { TeamComponent } from './pages/team/team.component';
     LoginComponent,
     RegisterComponent,
     MenuComponent,
+    ConfirmDialogComponent,
     NotificationComponent,
     MessagesComponent,
     ProfileComponent,
@@ -39,7 +44,10 @@ import { TeamComponent } from './pages/team/team.component';
     BrowserAnimationsModule,
     AngularMaterialModule,
     FlexLayoutModule,
-    Interceptor
+    MatDialogModule,
+    MatProgressSpinnerModule,
+    Interceptor,
+    MatIconModule
   ],
   providers: [
     MatSnackBar

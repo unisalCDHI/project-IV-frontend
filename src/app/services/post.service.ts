@@ -1,16 +1,16 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from './../../environments/environment';
-import { User } from './../shared/models/user';
+import { Post } from './../shared/models/post';
 import { CrudService } from './crud.service';
 
 @Injectable({
     providedIn: 'root'
   })
-  export class UserService extends CrudService<User, number> {
+  export class PostService extends CrudService<Post, number> {
   
     constructor(protected _http: HttpClient) {
-        super(_http, environment.apiUrl + '/users')
+        super(_http, environment.apiUrl + '/posts')
     }
 }
   

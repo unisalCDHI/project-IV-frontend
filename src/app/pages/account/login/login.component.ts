@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
 
   constructor(private formBuilder: FormBuilder, private _snackBar: MatSnackBar, private loginService: LoginService, private router: Router, private appComponent: AppComponent) {
-    if (localStorage.getItem('token')) {
+    if (localStorage.getItem('token') || localStorage.getItem('id')) {
       this.router.navigate(['']);
     }
   }
@@ -36,6 +36,7 @@ export class LoginComponent implements OnInit {
     this.loginService.login(this.loginForm.value).pipe(first())
       .subscribe(res => {
         localStorage.setItem('token', res.headers.get('Authorization'));
+        localStorage.setItem('id', res.headers.get('Id'));
         this.appComponent.changeToken();
         this.router.navigate(['']);
       }, error => {
