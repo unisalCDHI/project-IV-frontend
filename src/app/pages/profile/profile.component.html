@@ -1,14 +1,51 @@
 <div class="container">
-    <div id="background_"></div>
-        <img id="profile_picture_img" src="../../../assets/img/user.png" />
-            <div id="user_data">
-                <p>Nome de usuário</p>
-                <p id="user_adress" style="opacity: 0.5;">@UserName</p>
-            </div> 
-                <p id="header_posts"> Seus posts</p><div style="margin-top: 20px;width: 99.5%; border: 2px solid white; opacity: 0.5;"></div>
-
-    <div class="posts">
-        
     <div>
+        <img id="profile_picture_img" [src]="user?.avatar" />
+    </div>
+    <div id="user_data">
+        <p>{{ user?.name }}</p>
+        <p id="user_adress" style="opacity: 0.5;">@{{ user?.username }}</p>
+    </div>
+    <div style="margin-top: 20px;width: 99.5%; border: 2px solid white; opacity: 0.5;"></div>
+    <div class="posts">
+        <div *ngFor="let post of posts" class="card">
+            <mat-card>
+                <mat-card-content>
+                    <div style="min-height: 100px;">
+                        <div class="poster-icon">
+                            <img class="icon" src="../../../assets/img/user.png" />
+                        </div>
+                        <div class="poster-address-wrapper">
+                            <a style="opacity:0.5; color:white"> @{{post.owner.username}} </a>
+                        </div>
+                        <br>
+                        <div class="poster-name-wrapper">
+                            <a style="color:white"> {{post.owner.name}} </a>
+                        </div>
+                        <div class="post-text">
+                            <p style="padding: 5px;">
+                                {{post.body}}
+                            </p>
+                        </div>
+                        <div *ngIf="post.image !== ''" class="post-attachment-img">
+                            <img [src]="post.image" class="post-img-container" />
+                        </div>
+                        <div class="react-comment-share">
+                            <button mat-raised-button class="heart" (click)="like(post)">
+                                <mat-icon *ngIf="!post.liked">favorite</mat-icon>
+                                <mat-icon id="favorite" *ngIf="post.liked">favorite</mat-icon>
+                            </button>
+                            <button mat-raised-button class="comment">
+                                <mat-icon>comment</mat-icon>
+                            </button>
+                            <button mat-raised-button class="share">
+                                <mat-icon>wifi_protected_setup</mat-icon>
+                            </button>
+                        </div>
 
+                    </div>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
 </div>

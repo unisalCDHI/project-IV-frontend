@@ -11,10 +11,13 @@
 }
 
 #profile_picture_img{
-    margin-top: -80px;
+    margin-top: 35px;
     margin-left: 35px;
-    height: 150px;
-    width: 150px;
+    max-height: 150px;
+    height: auto;
+    max-width: 150px;
+    width: auto;
+    z-index: 2;
 }
 
 #user_data{
@@ -27,7 +30,6 @@
 
 #user_adress{
     margin-top: 20px;
-    margin-left: 20px;
 }
 
 #header_posts{
