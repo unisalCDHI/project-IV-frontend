@@ -77,6 +77,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.subs.push(
       this.postService.save(this.postForm.value).subscribe(res => {
         this.findAll();
+        this.postForm.reset();
       })
     );
   }
