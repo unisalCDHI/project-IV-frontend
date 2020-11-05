@@ -19,16 +19,27 @@ export class HomeComponent implements OnInit, OnDestroy {
   posts: Post[] = [];
   postForm: FormGroup;
   poolingRequest: any;
-  file: any;
 
   imgBase64: string = '';
+
+  showEmojiPicker = false;
+  sets = [
+    'native',
+    'google',
+    'twitter',
+    'facebook',
+    'emojione',
+    'apple',
+    'messenger'
+  ]
+  set = 'twitter';
 
   constructor(private postService: PostService, private _sanitizer: DomSanitizer, private fb: FormBuilder) { }
 
   buildForm() {
     this.postForm = this.fb.group({
-      body: [null],
-      image: [null]
+      body: [''],
+      image: ['']
     });
   }
 
@@ -45,7 +56,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   findAll() {
-    console.log(this.file);
     this.subs.push(
       this.postService.findAll().subscribe(res => {
         this.posts = res;
@@ -90,6 +100,22 @@ export class HomeComponent implements OnInit, OnDestroy {
         this.postForm.value.body = '';
     }
     myReader.readAsDataURL(file);
+  }
+
+  toggleEmojiPicker() {
+    this.showEmojiPicker = !this.showEmojiPicker;
+  }
+
+  addEmoji(event) {
+    this.postForm.get('body').patchValue(this.postForm.value.body + event.emoji.native);
+    // this.showEmojiPicker = false;
+  }
+
+  onFocus() {
+    this.showEmojiPicker = false;
+  }
+  onBlur() {
+    this.showEmojiPicker = false;
   }
 
   ngOnDestroy() {

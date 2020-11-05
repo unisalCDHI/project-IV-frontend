@@ -21,6 +21,7 @@ import { TeamComponent } from './pages/team/team.component';
 import {MatIconModule} from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { PickerModule } from '@ctrl/ngx-emoji-mart';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     MatDialogModule,
     MatProgressSpinnerModule,
     Interceptor,
-    MatIconModule
+    MatIconModule,
+    PickerModule
   ],
   providers: [
     MatSnackBar

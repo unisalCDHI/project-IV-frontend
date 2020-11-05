@@ -1,3 +1,4 @@
+@import '~@ctrl/ngx-emoji-mart/picker';
 @import "~@angular/material/theming";
 // Plus imports for other components in your app.
 
@@ -13,7 +14,7 @@ $dark-warn: mat-palette($mat-deep-orange);
 
 // Background palette for dark themes.
 $mat-dark-theme-background: (
-  status-bar: black,
+  status-bar: #15202b,
   app-bar:    map_get($mat-grey, 900),
   background: #303030,
   hover:      rgba(white, 0.04), // TODO(kara): check style with Material Design UX
@@ -74,6 +75,13 @@ body {
     background-repeat: no-repeat;
     min-height: 80vh;
     font-family: "Roboto", sans-serif;
+}
+
+.emoji-mart {
+    position: absolute;
+    background-color: #15202b;
+    z-index: 100;
+    margin: 20px 0px 0px 0px;
 }
 
 .example-container {
