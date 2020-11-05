@@ -21,6 +21,8 @@ export class HomeComponent implements OnInit, OnDestroy {
   poolingRequest: any;
   file: any;
 
+  imgBase64: string = '';
+
   constructor(private postService: PostService, private _sanitizer: DomSanitizer, private fb: FormBuilder) { }
 
   buildForm() {
@@ -59,18 +61,9 @@ export class HomeComponent implements OnInit, OnDestroy {
     );
   }
 
-  ngOnDestroy() {
-    clearInterval(this.poolingRequest);
-    this.subs.forEach(sub => {
-      sub.unsubscribe();
-    })
-  }
-
-  // onFileSelected(event) {
-  //   this.selectedFile = <File>event.target.files[0];
-  // }
-
   post() {
+    this.postForm.value.image = this.imgBase64;
+    this.imgBase64 = '';
     this.subs.push(
       this.postService.save(this.postForm.value).subscribe(res => {
         this.findAll();
@@ -78,8 +71,32 @@ export class HomeComponent implements OnInit, OnDestroy {
     );
   }
 
+  clearImage() {
+    this.imgBase64 = '';
+    this.postForm.value.image = '';
+  }
 
+  changeListener($event): void {
+    this.readThis($event.target);
+  }
 
+  readThis(inputValue: any): void {
+    let file: File = inputValue.files[0];
+    let myReader: FileReader = new FileReader();
 
+    myReader.onloadend = (e) => {
+      this.imgBase64 = myReader.result.toString();
+      if (this.postForm.value.body === null)
+        this.postForm.value.body = '';
+    }
+    myReader.readAsDataURL(file);
+  }
+
+  ngOnDestroy() {
+    clearInterval(this.poolingRequest);
+    this.subs.forEach(sub => {
+      sub.unsubscribe();
+    })
+  }
 
 }

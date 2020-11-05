@@ -61,6 +61,7 @@
     font-style: white;
     width: 100px;
     height: 40px;
+    margin-left: 310px;
 }
 
 #btn-attachment {
@@ -141,4 +142,29 @@
     border: 0px solid transparent;
     text-shadow: 0px 0px 0px transparent;
     margin-left: 100px;
+}
+
+.image-input {
+    margin: 10px;
+    bottom: 13px;
+    color: white;
+    display: flex;
+
+    .remove-image-button {
+        padding: 5px;
+        :hover {
+            cursor: pointer;
+        }
+    }
+}
+
+.image-selected {
+    overflow: hidden;
+    text-align: center;
+    img {
+        max-height: 400px;
+        max-width: 100%;
+        width: auto;
+        margin-bottom: 40px;
+    }
 }
