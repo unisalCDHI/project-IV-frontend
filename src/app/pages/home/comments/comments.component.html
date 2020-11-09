@@ -48,7 +48,7 @@
     <form [formGroup]="commentForm" (ngSubmit)="comment()">
         <div class="actions-wrapper">
             <mat-form-field appearance="fill" style="background-color: rgb(24, 45, 70); width: 100%;">
-                <mat-label>Escreva um comentário?</mat-label>
+                <mat-label>Escreva um comentário</mat-label>
                 <textarea formControlName="body" matInput style="resize: none;" maxlength="500"
                     (blur)="showEmojiPicker ? onBlur() : null" (focus)="onFocus()"></textarea>
             </mat-form-field>

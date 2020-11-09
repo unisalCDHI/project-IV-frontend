@@ -123,7 +123,6 @@ export class PostsComponent implements OnInit, OnDestroy {
   }
 
   openCommentarySection(post): void {
-    console.log(post);
     this.postSelected = post;
   }
 

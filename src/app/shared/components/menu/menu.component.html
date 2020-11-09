@@ -2,26 +2,38 @@
     <mat-card>
         <mat-card-content>
             <div style="min-height: 100px;">
-                <img style="max-height: 200px; width: 100%; max-width: 250px; margin-top: 15px;" src="../../../../assets/img/breeze-lateral.png" alt="Logo">
+                <img style="max-height: 200px; width: 100%; max-width: 250px; margin-top: 15px;"
+                    src="../../../../assets/img/breeze-lateral.png" alt="Logo">
             </div>
         </mat-card-content>
     </mat-card>
     <br>
     <ul>
-        <li>    
-             <button mat-button class="btn-block menu-btn" routerLink="/"> <mat-icon class="icon">home</mat-icon> <span> Página inicial</span></button>
+        <li>
+            <button mat-button class="btn-block menu-btn" routerLink="/">
+                <mat-icon class="icon">home</mat-icon> <span> Página inicial</span>
+            </button>
         </li>
         <li>
-            <button mat-button class="btn-block menu-btn" routerLink="/notifications"> <mat-icon class="icon">notifications</mat-icon> <span> Notificações</span></button>
+            <button mat-button class="btn-block menu-btn" routerLink="/notifications">
+                <mat-icon class="icon">notifications</mat-icon> <span> Notificações</span>
+            </button>
         </li>
         <li>
-            <button mat-button class="btn-block menu-btn" routerLink="/messages"> <mat-icon class="icon">message</mat-icon> <span> Mensagens</span></button>
+            <button mat-button class="btn-block menu-btn" routerLink="/messages">
+                <mat-icon  matBadge="1" matBadgePosition="after"
+                matBadgeColor="primary" class="icon">message</mat-icon> <span> Mensagens</span>
+            </button>
         </li>
         <li>
-            <button mat-button class="btn-block menu-btn" routerLink="/profile"> <mat-icon class="icon">account_circle</mat-icon> <span> Perfil</span></button>
+            <button mat-button class="btn-block menu-btn" routerLink="/profile">
+                <mat-icon class="icon">account_circle</mat-icon> <span> Perfil</span>
+            </button>
         </li>
         <li>
-            <button mat-button class="btn-block menu-btn" routerLink="/team"> <mat-icon class="icon">groups</mat-icon> <span>  Sua Equipe</span></button>
+            <button mat-button class="btn-block menu-btn" routerLink="/team">
+                <mat-icon class="icon">groups</mat-icon> <span> Sua Equipe</span>
+            </button>
         </li>
         <li>
             <button id="post-button" mat-raised-button class="btn-block">Criar post</button>
