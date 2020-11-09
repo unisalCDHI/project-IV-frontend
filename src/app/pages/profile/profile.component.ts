@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.scss', '../home/home.component.scss']
+  styleUrls: ['./profile.component.scss', '../home/posts/posts.component.scss']
 })
 export class ProfileComponent implements OnInit {
 

@@ -1,3 +1,5 @@
+import { CommentsComponent } from './pages/home/comments/comments.component';
+import { PostsComponent } from './pages/home/posts/posts.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -8,7 +10,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularMaterialModule } from './angular-material.module';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routing';
-import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/account/login/login.component';
 import { RegisterComponent } from './pages/account/register/register.component';
 import { Interceptor } from './services/interceptor.module';
@@ -21,11 +22,12 @@ import { TeamComponent } from './pages/team/team.component';
 import {MatIconModule} from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { PickerModule } from '@ctrl/ngx-emoji-mart';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
+    PostsComponent,
     LoginComponent,
     RegisterComponent,
     MenuComponent,
@@ -33,8 +35,9 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     NotificationComponent,
     MessagesComponent,
     ProfileComponent,
-    TeamComponent
-  ],
+    TeamComponent,
+    CommentsComponent
+    ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -47,7 +50,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     MatDialogModule,
     MatProgressSpinnerModule,
     Interceptor,
-    MatIconModule
+    MatIconModule,
+    PickerModule
   ],
   providers: [
     MatSnackBar
