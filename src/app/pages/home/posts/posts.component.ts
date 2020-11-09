@@ -1,24 +1,25 @@
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
-import { User } from './../../shared/models/user';
-import { UserService } from './../../services/user.service';
-import { Post } from './../../shared/models/post';
-import { PostService } from './../../services/post.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
-import { DomSanitizer } from '@angular/platform-browser';
+import { ConfirmDialogComponent } from 'src/app/shared/components/dialog-confirmation/confirm-dialog.component';
+import { PostService } from './../../../services/post.service';
+import { Post } from './../../../shared/models/post';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  selector: 'app-posts',
+  templateUrl: './posts.component.html',
+  styleUrls: ['./posts.component.scss']
 })
-export class HomeComponent implements OnInit, OnDestroy {
+export class PostsComponent implements OnInit, OnDestroy {
   selectedFile: File = null;
   subs: Subscription[] = [];
   posts: Post[] = [];
   postForm: FormGroup;
   poolingRequest: any;
+  myId: number;
+
+  postSelected: Post;
 
   imgBase64: string = '';
 
@@ -34,7 +35,9 @@ export class HomeComponent implements OnInit, OnDestroy {
   ]
   set = 'twitter';
 
-  constructor(private postService: PostService, private _sanitizer: DomSanitizer, private fb: FormBuilder) { }
+  constructor(private postService: PostService, private fb: FormBuilder, private dialog: MatDialog) {
+    this.myId = Number(localStorage.getItem('id'));
+   }
 
   buildForm() {
     this.postForm = this.fb.group({
@@ -117,6 +120,36 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
   onBlur() {
     this.showEmojiPicker = false;
+  }
+
+  openCommentarySection(post): void {
+    console.log(post);
+    this.postSelected = post;
+  }
+
+  closeCommentarySection(): void {
+    this.postSelected = undefined;
+  }
+
+  deletePost(post: Post) {
+    const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
+      data: {
+        title: 'Confirme a ação',
+        message: 'Você tem certeza que deseja remover esta postagem?'
+      }
+    });
+    confirmDialog.afterClosed().subscribe(result => {
+      if (result === true) {
+        this.postService.delete(post.id).subscribe(res => {
+          this.findAll();
+        }, error => { console.log(error) });
+      }
+    });
+
+  }
+
+  formatDate(date) {
+    return new Date(date).toLocaleString();
   }
 
   ngOnDestroy() {

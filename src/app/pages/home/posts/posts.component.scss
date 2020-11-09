@@ -1,21 +1,24 @@
-
-.container {
-    border: 2px solid #2c4863;
-    border-radius: 1px;
-}
-
 .card {
     color: #fff;
     top: 0;
     opacity: 1;
     padding: 30px;
-    width: 100%;
+    width: 87%;
     background: rgba(24, 45, 70, 1);
     box-shadow: inset 0 0 1em rgba(24, 45, 70, 1);
     border-radius: 10px;
-    max-width: 350px;
     margin: 0 0 20px 0;
     word-wrap: break-word;
+    min-width: 300px;
+}
+
+.scroll-wrapper{
+    margin-right: 10px;
+}
+
+.mat-grid-tile {
+    margin: 5px;
+    overflow-y: auto;
 }
 
 .icon {
@@ -61,7 +64,8 @@
     font-style: white;
     width: 100px;
     height: 40px;
-    margin-left: 310px;
+    right: 10px;
+    position: absolute;
 }
 
 #btn-attachment {
@@ -88,18 +92,35 @@
     height: 20px;
 }
 
-#favorite{
+#favorite {
     color: red;
 }
 
+#delete-post-button {
+    position: absolute;
+    left: calc(87%);
+    cursor: pointer;
+}
+
+.created-date {
+    margin-top: -23px;
+    width: 400px;
+    position: absolute;
+    left: calc(68%);
+    opacity:0.5; 
+    color:white;
+}
+
 .post-attachment-img {
-    width: 325px;
-    margin-left: 20px;
+    overflow: hidden;
+    text-align: center;
+    width: 100%;
+    max-height: 500px;
 }
 
 .post-img-container {
-    max-width: 100%;
-    max-height: 100%;
+    width: 100%;
+    height: auto;
 }
 
 .heart-comment-share {
@@ -168,3 +189,7 @@
         margin-bottom: 40px;
     }
 }
+
+@media only screen and (max-width: 430px) {
+
+  }
