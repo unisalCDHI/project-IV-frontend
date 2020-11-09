@@ -24,7 +24,7 @@
                                 <!--😀-->
                             </button>
                             <emoji-mart class="emoji-mart" set="{{set}}" *ngIf="showEmojiPicker"
-                                (emojiSelect)="addEmoji($event)" title="Pick your emoji…"></emoji-mart>
+                                (emojiSelect)="addEmoji($event)" title="Selecione o emoji…"></emoji-mart>
                             <div class="remove-image-button">
                                 <mat-icon *ngIf="imgBase64 !== '' && imgBase64 !== null" (click)="clearImage()">
                                     delete</mat-icon>
