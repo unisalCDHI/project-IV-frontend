@@ -64,10 +64,12 @@
                                         <button mat-raised-button type="button" class="heart" (click)="like(post)">
                                             <mat-icon *ngIf="!post.liked">favorite</mat-icon>
                                             <mat-icon id="favorite" *ngIf="post.liked">favorite</mat-icon>
+                                            {{ post.likes.length }}
                                         </button>
                                         <button mat-raised-button type="button" class="comment"
                                             (click)="openCommentarySection(post)">
                                             <mat-icon>comment</mat-icon>
+                                            {{ post.totalCommentaries }}
                                         </button>
                                         <button mat-raised-button type="button" class="share">
                                             <mat-icon>wifi_protected_setup</mat-icon>

@@ -1,3 +1,4 @@
+import { Subscription } from 'rxjs';
 import { PostService } from './../../services/post.service';
 import { MatDialog } from '@angular/material/dialog';
 import { Post } from './../../shared/models/post';
@@ -15,6 +16,7 @@ export class ProfileComponent implements OnInit {
 
   userId: number;
   user: User;
+  subs: Subscription[] = [];
   posts: Post[];
   postSelected: Post;
 
@@ -41,6 +43,14 @@ export class ProfileComponent implements OnInit {
 
   closeCommentarySection(): void {
     this.postSelected = undefined;
+  }
+
+  like(post: Post) {
+    this.subs.push(
+      this.postService.update(post.id, null).subscribe(res => {
+        this.getPostData();
+      })
+    );
   }
 
   deletePost(post: Post) {
