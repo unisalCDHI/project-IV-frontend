@@ -21,7 +21,7 @@ export class AppComponent {
     localStorage.removeItem('token');
     localStorage.removeItem('id');
     this.changeToken();
-    this.router.navigate(['login'])
+    this.router.navigate(['login']);
   }
 
   changeToken() {

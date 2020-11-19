@@ -4,7 +4,7 @@
     <a mat-raised-button routerLink="/" routerLinkActive="active">Home</a>
   </div>
   <span class="nav-tool-items">
-    <a *ngIf="!token" gIf="Property" mat-button routerLink="login" routerLinkActive="active">Log in</a>
+    <a *ngIf="!token" mat-button routerLink="login" routerLinkActive="active">Log in</a>
     <a *ngIf="token" mat-button (click)="logout()" routerLinkActive="active">Log out</a>
     <a *ngIf="!token" mat-button mat-raised-button style="background-color: rgb(24, 45, 70);" routerLink="register" routerLinkActive="active">Register</a>
   </span>
