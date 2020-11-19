@@ -68,6 +68,18 @@ body {
     display: block !important;
 }
 
+.material-tooltip {
+    background-color: #2f64b9;
+}
+
+.background-green {
+    background-color: lightgreen;
+}
+
+.background-red {
+    background-color: rgba($color: red, $alpha: 0.3);
+}
+
 body {
     background-attachment: fixed;
     background-color: #15202b;

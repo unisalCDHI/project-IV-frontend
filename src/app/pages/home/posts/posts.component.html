@@ -42,16 +42,18 @@
                                 delete</mat-icon>
                             <mat-card-content>
                                 <div style="min-height: 100px;">
-                                    <div class="poster-icon">
-                                        <img class="icon" [src]="post.owner.avatar" />
-                                    </div>
-                                    <div class="poster-address-wrapper">
-                                        <a style="opacity:0.5; color:white"> @{{post.owner.username}} </a>
-                                    </div>
-                                    <br>
-                                    <div class="poster-name-wrapper">
-                                        <a style="color:white"> {{post.owner.name}} </a>
-                                    </div>
+                                    <a [routerLink]="['/profile/'+post.owner.id.toString()]">
+                                        <div class="poster-icon">
+                                            <img class="icon" [src]="post.owner.avatar" />
+                                        </div>
+                                        <div class="poster-address-wrapper">
+                                            <a style="opacity:0.5; color:white"> @{{post.owner.username}} </a>
+                                        </div>
+                                        <br>
+                                        <div class="poster-name-wrapper">
+                                            <a style="color:white"> {{post.owner.name}} </a>
+                                        </div>
+                                    </a>
                                     <div class="post-text">
                                         <p style="padding: 5px;">
                                             {{post.body}}

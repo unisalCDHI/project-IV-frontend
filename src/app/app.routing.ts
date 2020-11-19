@@ -15,7 +15,7 @@ const APP_ROUTE: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'notifications', component: NotificationComponent, canActivate: [AuthGuard] },
   { path: 'messages', component: MessagesComponent, canActivate: [AuthGuard] },
-  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
+  { path: 'profile/:id', component: ProfileComponent, canActivate: [AuthGuard] },
   { path: 'team', component: TeamComponent, canActivate: [AuthGuard] }
 ]
 

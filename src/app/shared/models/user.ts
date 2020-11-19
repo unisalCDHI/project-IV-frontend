@@ -4,4 +4,5 @@ export class User {
     public email: string;
     public username: string;
     public avatar: string;
+    public createdDate: any;
 }
