@@ -24,6 +24,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { PickerModule } from '@ctrl/ngx-emoji-mart';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatTabsModule} from '@angular/material/tabs';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     Interceptor,
     MatIconModule,
     MatAutocompleteModule,
-    PickerModule
+    PickerModule,
+    MatTabsModule
   ],
   providers: [
     MatSnackBar

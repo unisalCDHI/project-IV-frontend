@@ -38,7 +38,8 @@ export class RegisterComponent implements OnInit {
         duration: 5000
       });
     }, error => {
-      this._snackBar.open(error.error ? error.error.message : "Erro desconhecido", "Fechar", {
+      console.log(error)
+      this._snackBar.open(error.error.errors.length > 0 ? error.error.errors[0].defaultMessage : "Erro desconhecido", "Fechar", {
         duration: 2000
       });
     })

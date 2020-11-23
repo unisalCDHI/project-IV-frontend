@@ -17,6 +17,7 @@ import { User } from './../../shared/models/user';
 export class ProfileComponent implements OnInit {
 
   userId: number;
+  currentUserId: number;
   user: User;
   subs: Subscription[] = [];
   posts: Post[];
@@ -25,16 +26,18 @@ export class ProfileComponent implements OnInit {
   imgBase64: string = '';
   readyToSave: boolean = false;
 
-  constructor(private userService: UserService, private dialog: MatDialog, private postService: PostService, private _snackBar: MatSnackBar, private route: ActivatedRoute) {
-    this.userId = Number(this.route.snapshot.params['id']);
-  }
+  constructor(private userService: UserService, private dialog: MatDialog, private postService: PostService, private _snackBar: MatSnackBar, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.getProfileData();
+    this.route.params.subscribe(routeParams => {
+      this.userId = Number(localStorage.getItem('id'));
+      this.currentUserId = Number(this.route.snapshot.params['id']);
+      this.getProfileData();
+    });
   }
 
   getProfileData() {
-    this.userService.findOne(Number(this.userId)).subscribe(res => {
+    this.userService.findOne(Number(this.currentUserId)).subscribe(res => {
       this.readyToSave = false;
       this.user = res;
       this.getPostData();
@@ -42,7 +45,7 @@ export class ProfileComponent implements OnInit {
   }
 
   getPostData() {
-    this.userService.getPosts(Number(this.userId)).subscribe(res => {
+    this.userService.getPosts(Number(this.currentUserId)).subscribe(res => {
       this.posts = res;
     })
   }
@@ -55,6 +58,14 @@ export class ProfileComponent implements OnInit {
     this.subs.push(
       this.postService.update(post.id, null).subscribe(res => {
         this.getPostData();
+      })
+    );
+  }
+
+  follow() {
+    this.subs.push(
+      this.userService.follow(this.user.id).subscribe(res => {
+        this.getProfileData();
       })
     );
   }
