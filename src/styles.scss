@@ -1,3 +1,4 @@
+@import "~@ctrl/ngx-emoji-mart/picker";
 @import "~@angular/material/theming";
 // Plus imports for other components in your app.
 
@@ -13,35 +14,36 @@ $dark-warn: mat-palette($mat-deep-orange);
 
 // Background palette for dark themes.
 $mat-dark-theme-background: (
-  status-bar: black,
-  app-bar:    map_get($mat-grey, 900),
-  background: #303030,
-  hover:      rgba(white, 0.04), // TODO(kara): check style with Material Design UX
-  card:       map_get($mat-grey, 800),
-  dialog:     #15202b,
-  disabled-button: $white-12-opacity,
-  raised-button: #3b7eeb,
-  focused-button: $white-6-opacity,
-  selected-button: map_get($mat-grey, 900),
-  selected-disabled-button: map_get($mat-grey, 800),
-  disabled-button-toggle: map_get($mat-grey, 1000),
+    status-bar: #15202b,
+    app-bar: map_get($mat-grey, 900),
+    background: #303030,
+    hover: rgba(white, 0.04),
+    // TODO(kara): check style with Material Design UX
+    card: map_get($mat-grey, 800),
+    dialog: #15202b,
+    disabled-button: $white-12-opacity,
+    raised-button: #3b7eeb,
+    focused-button: $white-6-opacity,
+    selected-button: map_get($mat-grey, 900),
+    selected-disabled-button: map_get($mat-grey, 800),
+    disabled-button-toggle: map_get($mat-grey, 1000),
 );
 
 // Foreground palette for dark themes.
 $mat-dark-theme-foreground: (
-  base:              white,
-  divider:           $white-12-opacity,
-  dividers:          $white-12-opacity,
-  disabled:          rgba(white, 0.3),
-  disabled-button:   rgba(white, 0.3),
-  disabled-text:     rgba(white, 0.3),
-  hint-text:         rgba(white, 0.3),
-  secondary-text:    rgba(white, 0.7),
-  icon:              white,
-  icons:             white,
-  text:              white,
-  slider-off:        rgba(white, 0.3),
-  slider-off-active: rgba(white, 0.3),
+    base: white,
+    divider: $white-12-opacity,
+    dividers: $white-12-opacity,
+    disabled: rgba(white, 0.3),
+    disabled-button: rgba(white, 0.3),
+    disabled-text: rgba(white, 0.3),
+    hint-text: rgba(white, 0.3),
+    secondary-text: rgba(white, 0.7),
+    icon: white,
+    icons: white,
+    text: white,
+    slider-off: rgba(white, 0.3),
+    slider-off-active: rgba(white, 0.3),
 );
 
 $dark-theme: mat-dark-theme(
@@ -50,7 +52,7 @@ $dark-theme: mat-dark-theme(
             primary: $dark-primary,
             accent: $dark-accent,
             warn: $dark-warn,
-        )
+        ),
     )
 );
 
@@ -74,6 +76,13 @@ body {
     background-repeat: no-repeat;
     min-height: 80vh;
     font-family: "Roboto", sans-serif;
+}
+
+.emoji-mart {
+    position: absolute;
+    background-color: #15202b;
+    z-index: 100;
+    margin: 20px 0px 0px 0px;
 }
 
 .example-container {
@@ -107,10 +116,28 @@ body {
     width: 80%;
     background: #15202b;
     border-radius: 5px;
-    .posts {
-        padding: 50px;
-        box-shadow: inset 2.5px 5px rgb(24, 45, 70);
-    }
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px rgba(24, 45, 70, 1);
+    border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #3b7eeb;
+    border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: rgba($color: #2f64b9, $alpha: 1);
 }
 
 .container2 {
@@ -119,10 +146,6 @@ body {
     width: 65%;
     background: #15202b;
     border-radius: 5px;
-    .posts {
-        padding: 50px;
-        box-shadow: inset 2.5px 5px rgb(24, 45, 70);
-    }
 }
 
 .box {
@@ -196,6 +219,7 @@ body {
 
 html,
 body {
+    color: white;
     margin: 0;
     font-family: Roboto, "Helvetica Neue", sans-serif;
 }

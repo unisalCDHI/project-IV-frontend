@@ -6,8 +6,9 @@ export class Post {
     public owner: User;
     public commentary: boolean;
     public image: string;
+    public liked: boolean;
     public likes: User[];
     public totalLikes: number;
     public totalCommentaries: number;
-    public createdData: any;
+    public createdDate: any;
 }
