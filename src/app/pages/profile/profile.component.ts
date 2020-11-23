@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ConfirmDialogComponent } from 'src/app/shared/components/dialog-confirmation/confirm-dialog.component';
 import { PostService } from './../../services/post.service';
@@ -25,8 +25,9 @@ export class ProfileComponent implements OnInit {
   seePosts: boolean = false;
   imgBase64: string = '';
   readyToSave: boolean = false;
+  loadingName: boolean = false;
 
-  constructor(private userService: UserService, private dialog: MatDialog, private postService: PostService, private _snackBar: MatSnackBar, private route: ActivatedRoute) { }
+  constructor(private userService: UserService, private dialog: MatDialog, private postService: PostService, private _snackBar: MatSnackBar, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(routeParams => {
@@ -41,6 +42,9 @@ export class ProfileComponent implements OnInit {
       this.readyToSave = false;
       this.user = res;
       this.getPostData();
+    }, error => {
+      console.log(error);
+      this.router.navigate(['/404']);
     })
   }
 
@@ -60,6 +64,20 @@ export class ProfileComponent implements OnInit {
         this.getPostData();
       })
     );
+  }
+
+  saveName(event) {
+    this.loadingName = true;
+    this.user.name = event.target.value;
+    this.subs.push(
+      this.userService.update(this.user.id, this.user).subscribe(res => {
+        this.getPostData();
+        this.loadingName = false;
+      }, error => {
+        this.loadingName = false;
+      })
+    );
+    console.log()
   }
 
   follow() {

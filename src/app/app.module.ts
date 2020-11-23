@@ -25,6 +25,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { PickerModule } from '@ctrl/ngx-emoji-mart';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatTabsModule} from '@angular/material/tabs';
+import { NotFoundComponent } from './shared/components/not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import {MatTabsModule} from '@angular/material/tabs';
     MessagesComponent,
     ProfileComponent,
     TeamComponent,
-    CommentsComponent
+    CommentsComponent,
+    NotFoundComponent
     ],
   imports: [
     BrowserModule,
