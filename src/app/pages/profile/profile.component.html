@@ -7,24 +7,35 @@
             </div>
             <div class="img-container">
                 <img id="profile_picture_img" [src]="user?.avatar" />
-                <ng-template [ngIf]="!readyToSave" [ngIfElse]="saveOptions">
-                    <mat-icon matTooltip="Editar imagem" matTooltipClass="material-tooltip" (click)="imageInput.click()"
+                <div *ngIf="currentUserId === userId">
+                    <ng-template [ngIf]="!readyToSave" [ngIfElse]="saveOptions">
+                        <mat-icon matTooltip="Editar imagem" matTooltipClass="material-tooltip" (click)="imageInput.click()"
                         class="edit-icon">edit</mat-icon>
-                </ng-template>
-                <ng-template #saveOptions>
-                    <mat-icon matTooltip="Salvar imagem" matTooltipClass="material-tooltip" (click)="save()"
+                    </ng-template>
+                    <ng-template #saveOptions>
+                        <mat-icon matTooltip="Salvar imagem" matTooltipClass="material-tooltip" (click)="save()"
                         class="save-icon">save</mat-icon>
-                    <span class="save-message">Tem certeza que quer salvar este avatar?</span>
-                    <mat-icon matTooltip="Cancelar" matTooltipClass="material-tooltip" (click)="getProfileData()"
+                        <span class="save-message">Tem certeza que quer salvar este avatar?</span>
+                        <mat-icon matTooltip="Cancelar" matTooltipClass="material-tooltip" (click)="getProfileData()"
                         class="cancel-icon">cancel</mat-icon>
-                </ng-template>
+                    </ng-template>
+                </div>
             </div>
             <p>Entrou em {{ user ? formatDate(user.createdDate) : '' }}</p>
         </div>
         <br style="clear: both;">
         <div class="row">
             <div id="user_data">
-                <p>{{ user?.name }}</p>
+                <ng-template [ngIf]="currentUserId === userId" [ngIfElse]="userNameForOtherUsers">
+                    <mat-form-field class="inputForName" style="z-index: 10;">
+                        <!-- <mat-label>Nome</mat-label> -->
+                        <input matInput value="{{ user?.name }}" (keyup.enter)="saveName($event)" (blur)="saveName($event)" max="255">
+                        <mat-spinner [diameter]="30" class="loadingName" *ngIf="loadingName"></mat-spinner>
+                    </mat-form-field>
+                </ng-template>
+                <ng-template #userNameForOtherUsers>
+                    <p>{{ user?.name }}</p>
+                </ng-template>
                 <p id="user_adress" style="opacity: 0.5;">@{{ user?.username }}</p>
             </div>
             <div *ngIf="currentUserId !== userId">
@@ -43,7 +54,7 @@
     </div>
     <br style="clear: both;">
     <mat-tab-group *ngIf="!seePosts">
-        <mat-tab label="{{ 'Seguindo ( ' + user.followings.length + ' )'}}">
+        <mat-tab label="{{ 'Seguindo ( ' + user?.followings.length + ' )'}}">
             <div *ngFor="let u of user?.followings">
                 <a [routerLink]="['/profile/'+u?.id.toString()]">
                     <div *ngIf="u !== null" class="person">
@@ -58,7 +69,7 @@
                 </a>
             </div>
         </mat-tab>
-        <mat-tab label="{{ 'Seguidores ( ' + user.followers.length + ' )'}}">
+        <mat-tab label="{{ 'Seguidores ( ' + user?.followers.length + ' )'}}">
             <div *ngFor="let u of user?.followers">
                 <a [routerLink]="['/profile/'+u?.id.toString()]">
                     <div *ngIf="u !== null" class="person">

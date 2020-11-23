@@ -43,13 +43,6 @@
     transition: 2s;
 }
 
-.row {
-    :first-child {
-        float: left;
-        min-width: 200px;
-    }
-}
-
 .img-container {
     margin-top: 35px;
     margin-left: 35px;
@@ -66,7 +59,7 @@
     text-align: center;
     padding-top: 8px;
     cursor: pointer;
-    margin-top: -15px;
+    margin-top: -135px;
     margin-left: -15px;
     position: absolute;
     background-color: rgba($color: #2f64b9, $alpha: 1);
@@ -79,7 +72,7 @@
     text-align: center;
     padding-top: 8px;
     cursor: pointer;
-    margin-top: -15px;
+    margin-top: -135px;
     margin-left: -15px;
     position: absolute;
     background-color: rgba($color: green, $alpha: 1);
@@ -90,15 +83,29 @@
 
 .save-message {
     width: 145px;
+    margin-top: -135px;
     margin-left: 30px;
     position: absolute;
+}
+
+.inputForName {
+    width: 50%;
+    min-width: 450px;
+    margin-top: -1.25em;
+    margin-bottom: -1.25em;
+
+}
+
+.loadingName {
+    margin-top: -30px;
+    float: right;
 }
 
 .cancel-icon {
     text-align: center;
     padding-top: 8px;
     cursor: pointer;
-    margin-top: 30px;
+    margin-top: -90px;
     margin-left: -15px;
     position: absolute;
     background-color: rgba($color: red, $alpha: 1);
@@ -118,6 +125,8 @@
     padding-top: 10px;
     font-size: 25px;
     clear: both;
+    float: left;
+    min-width: 200px;
 }
 
 #user_adress {
