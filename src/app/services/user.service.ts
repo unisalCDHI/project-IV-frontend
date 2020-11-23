@@ -17,5 +17,9 @@ import { CrudService } from './crud.service';
     getPosts(userId: number): Observable<any> {
       return this._http.get<any>(this._base + '/posts/' + userId);
     }
+
+    follow(userId: number): Observable<any> {
+      return this._http.put<any>(this._base + '/follow/' + userId, null);
+    }
 }
   

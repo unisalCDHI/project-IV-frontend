@@ -64,8 +64,61 @@ body {
     padding: 5px;
 }
 
+.icon-wrapper{
+    float: left;
+}
+
+.data-wrapper{
+    float: left;
+    color: white;
+}
+
+.name{
+    margin-left: 8px;
+    margin-top: 2px;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.person{
+    margin-top: 10px;
+    margin-left: 12px;
+    padding: 20px 10px 10px 20px;
+    width: 93%;
+    height: 70px;
+}
+
+.person:hover {
+    cursor: pointer;
+    background-color: rgba($color: #000000, $alpha: 0.3);
+}
+
+/* Create two equal columns that floats next to each other */
+.column {
+    float: left;
+    width: 50%;
+    padding: 10px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+    clear: both;
+}
+
 .mat-grid-tile .mat-figure {
     display: block !important;
+}
+
+.material-tooltip {
+    background-color: #2f64b9;
+}
+
+.background-green {
+    background-color: lightgreen;
+}
+
+.background-red {
+    background-color: rgba($color: red, $alpha: 0.3);
 }
 
 body {

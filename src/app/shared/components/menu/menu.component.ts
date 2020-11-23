@@ -12,4 +12,8 @@ export class MenuComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  getUserRoute(): string {
+    return '/profile/' + localStorage.getItem('id').toString();
+  }
+
 }

@@ -7,20 +7,23 @@
         <div class="card">
             <mat-card>
                 <div class="created-date">{{ formatDate(commentary.createdDate) }}</div>
-                <mat-icon id="delete-post-button" *ngIf="commentary.owner.id === myId" (click)="deleteComment(commentary)">
+                <mat-icon id="delete-post-button" *ngIf="commentary.owner.id === myId"
+                    (click)="deleteComment(commentary)">
                     delete</mat-icon>
                 <mat-card-content>
                     <div style="min-height: 100px;">
-                        <div class="poster-icon">
-                            <img class="icon" [src]="commentary.owner.avatar" />
-                        </div>
-                        <div class="poster-address-wrapper">
-                            <a style="opacity:0.5; color:white"> @{{commentary.owner.username}} </a>
-                        </div>
-                        <br>
-                        <div class="poster-name-wrapper">
-                            <a style="color:white"> {{commentary.owner.name}} </a>
-                        </div>
+                        <a [routerLink]="['/profile/'+commentary.owner.id.toString()]">
+                            <div class="poster-icon">
+                                <img class="icon" [src]="commentary.owner.avatar" />
+                            </div>
+                            <div class="poster-address-wrapper">
+                                <a style="opacity:0.5; color:white"> @{{commentary.owner.username}} </a>
+                            </div>
+                            <br>
+                            <div class="poster-name-wrapper">
+                                <a style="color:white"> {{commentary.owner.name}} </a>
+                            </div>
+                        </a>
                         <div class="post-text">
                             <p style="padding: 5px;">
                                 {{commentary.body}}
@@ -48,7 +51,7 @@
     <form [formGroup]="commentForm" (ngSubmit)="comment()">
         <div class="actions-wrapper">
             <mat-form-field appearance="fill" style="background-color: rgb(24, 45, 70); width: 100%;">
-                <mat-label>Escreva um comentário?</mat-label>
+                <mat-label>Escreva um comentário</mat-label>
                 <textarea formControlName="body" matInput style="resize: none;" maxlength="500"
                     (blur)="showEmojiPicker ? onBlur() : null" (focus)="onFocus()"></textarea>
             </mat-form-field>
@@ -66,8 +69,8 @@
                     <mat-icon>insert_emoticon</mat-icon>
                     <!--😀-->
                 </button>
-                <emoji-mart class="emoji-mart" set="{{set}}" *ngIf="showEmojiPicker"
-                    (emojiSelect)="addEmoji($event)" title="Pick your emoji…"></emoji-mart>
+                <emoji-mart class="emoji-mart" set="{{set}}" *ngIf="showEmojiPicker" (emojiSelect)="addEmoji($event)"
+                    title="Pick your emoji…"></emoji-mart>
                 <div class="remove-image-button">
                     <mat-icon *ngIf="imgBase64 !== '' && imgBase64 !== null" (click)="clearImage()">
                         delete</mat-icon>
@@ -84,16 +87,18 @@
                 delete</mat-icon>
             <mat-card-content>
                 <div style="min-height: 100px;">
-                    <div class="poster-icon">
-                        <img class="icon" [src]="comment.owner.avatar" />
-                    </div>
-                    <div class="poster-address-wrapper">
-                        <a style="opacity:0.5; color:white"> @{{comment.owner.username}} </a>
-                    </div>
-                    <br>
-                    <div class="poster-name-wrapper">
-                        <a style="color:white"> {{comment.owner.name}} </a>
-                    </div>
+                    <a [routerLink]="['/profile/'+comment.owner.id.toString()]">
+                        <div class="poster-icon">
+                            <img class="icon" [src]="comment.owner.avatar" />
+                        </div>
+                        <div class="poster-address-wrapper">
+                            <a style="opacity:0.5; color:white"> @{{comment.owner.username}} </a>
+                        </div>
+                        <br>
+                        <div class="poster-name-wrapper">
+                            <a style="color:white"> {{comment.owner.name}} </a>
+                        </div>
+                    </a>
                     <div class="post-text">
                         <p style="padding: 5px;">
                             {{comment.body}}

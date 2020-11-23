@@ -42,16 +42,18 @@
                                 delete</mat-icon>
                             <mat-card-content>
                                 <div style="min-height: 100px;">
-                                    <div class="poster-icon">
-                                        <img class="icon" [src]="post.owner.avatar" />
-                                    </div>
-                                    <div class="poster-address-wrapper">
-                                        <a style="opacity:0.5; color:white"> @{{post.owner.username}} </a>
-                                    </div>
-                                    <br>
-                                    <div class="poster-name-wrapper">
-                                        <a style="color:white"> {{post.owner.name}} </a>
-                                    </div>
+                                    <a [routerLink]="['/profile/'+post.owner.id.toString()]">
+                                        <div class="poster-icon">
+                                            <img class="icon" [src]="post.owner.avatar" />
+                                        </div>
+                                        <div class="poster-address-wrapper">
+                                            <a style="opacity:0.5; color:white"> @{{post.owner.username}} </a>
+                                        </div>
+                                        <br>
+                                        <div class="poster-name-wrapper">
+                                            <a style="color:white"> {{post.owner.name}} </a>
+                                        </div>
+                                    </a>
                                     <div class="post-text">
                                         <p style="padding: 5px;">
                                             {{post.body}}
@@ -64,10 +66,12 @@
                                         <button mat-raised-button type="button" class="heart" (click)="like(post)">
                                             <mat-icon *ngIf="!post.liked">favorite</mat-icon>
                                             <mat-icon id="favorite" *ngIf="post.liked">favorite</mat-icon>
+                                            {{ post.likes.length }}
                                         </button>
                                         <button mat-raised-button type="button" class="comment"
                                             (click)="openCommentarySection(post)">
                                             <mat-icon>comment</mat-icon>
+                                            {{ post.totalCommentaries }}
                                         </button>
                                         <button mat-raised-button type="button" class="share">
                                             <mat-icon>wifi_protected_setup</mat-icon>

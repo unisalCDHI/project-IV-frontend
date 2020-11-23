@@ -25,6 +25,17 @@ export class CommentsComponent implements OnInit, OnDestroy {
   showEmojiPicker = false;
   myId: number;
 
+  sets = [
+    'native',
+    'google',
+    'twitter',
+    'facebook',
+    'emojione',
+    'apple',
+    'messenger'
+  ]
+  set = 'twitter';
+
   constructor(private postService: PostService, private fb: FormBuilder, private dialog: MatDialog) {
     this.myId = Number(localStorage.getItem('id'));
    }
