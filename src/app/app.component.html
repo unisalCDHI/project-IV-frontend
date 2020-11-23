@@ -1,12 +1,32 @@
 <!-- Toolbar -->
 <mat-toolbar class="app-header">
-  <div>    
+  <div>
     <a mat-raised-button routerLink="/" routerLinkActive="active">Home</a>
+    <mat-form-field id="search-users" class="example-full-width" *ngIf="token" [floatLabel]="'never'">
+      <mat-label>Pesquisar usuários</mat-label>
+      <input matInput autocomplete="off" (keyup)="searchUser($event.target.value)" [matAutocomplete]="auto">
+      <mat-autocomplete #auto="matAutocomplete" class="mat-autocomplete">
+        <mat-option *ngFor="let user of users">
+          <a [routerLink]="['/profile/'+user?.id.toString()]">
+            <div *ngIf="user !== null" class="person">
+              <!-- <div *ngIf="user.avatar !== '' && user.avatar !== null" class="icon-wrapper">
+                <img class="icon" [src]="user.avatar" />
+              </div> -->
+              <div class="data-wrapper">
+                <a class="adress" style="opacity: 0.5;">@{{ user.username }}</a>
+                <p class="name">{{ user.name }}</p>
+              </div>
+            </div>
+          </a>
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
   </div>
   <span class="nav-tool-items">
     <a *ngIf="!token" mat-button routerLink="login" routerLinkActive="active">Log in</a>
     <a *ngIf="token" mat-button (click)="logout()" routerLinkActive="active">Log out</a>
-    <a *ngIf="!token" mat-button mat-raised-button style="background-color: rgb(24, 45, 70);" routerLink="register" routerLinkActive="active">Register</a>
+    <a *ngIf="!token" mat-button mat-raised-button style="background-color: rgb(24, 45, 70);" routerLink="register"
+      routerLinkActive="active">Register</a>
   </span>
 </mat-toolbar>
 

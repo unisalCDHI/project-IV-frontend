@@ -1,0 +1,16 @@
+#search-users {
+    margin-left: 20px;
+    min-width: 300px;
+}
+
+.mat-autocomplete-panel,
+.mat-autocomplete,
+.ng-star-inserted,
+.mat-autocomplete-visible {
+    background-color: #15202b;
+}
+
+
+.mat-autocomplete-panel .mat-autocomplete .ng-star-inserted .mat-autocomplete-visible {
+    background-color: rgba($color: #15202b, $alpha: 0.2);
+}
