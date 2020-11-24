@@ -1,16 +1,48 @@
 #search-users {
     margin-left: 20px;
     min-width: 300px;
+    width: 100%;
 }
 
 .mat-autocomplete-panel,
 .mat-autocomplete,
 .ng-star-inserted,
 .mat-autocomplete-visible {
-    background-color: #15202b;
+    background-color: #15202b !important;
 }
 
+.mat-option:hover:not(.mat-option-disabled) {
+    background: rgba($color: #2f64b9, $alpha: 0.6) !important;
+}
 
-.mat-autocomplete-panel .mat-autocomplete .ng-star-inserted .mat-autocomplete-visible {
-    background-color: rgba($color: #15202b, $alpha: 0.2);
+.mat-option {
+    height: 70px;
+}
+
+.search-option {
+    // padding-top: 20px;
+    a {
+        padding: 0;
+        margin: 0;
+        color: white;
+        text-decoration: none;
+    }
+    .text {
+        line-height: 1.2;
+    }
+}
+
+.icon-wrapper {
+    height: 50px;
+    width: 50px;
+    margin: 0 20px 0 0;
+    border-radius: 50px;
+}
+
+img {
+    border-radius: 50px;
+    max-width: 50px;
+    max-height: 50px;
+    height: auto;
+    width: 100%;
 }

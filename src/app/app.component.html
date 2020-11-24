@@ -7,17 +7,15 @@
       <input matInput autocomplete="off" (keyup)="searchUser($event.target.value)" [matAutocomplete]="auto">
       <mat-autocomplete #auto="matAutocomplete" class="mat-autocomplete">
         <mat-option *ngFor="let user of users">
-          <a [routerLink]="['/profile/'+user?.id.toString()]">
-            <div *ngIf="user !== null" class="person">
-              <!-- <div *ngIf="user.avatar !== '' && user.avatar !== null" class="icon-wrapper">
-                <img class="icon" [src]="user.avatar" />
-              </div> -->
-              <div class="data-wrapper">
-                <a class="adress" style="opacity: 0.5;">@{{ user.username }}</a>
-                <p class="name">{{ user.name }}</p>
+          <div class="search-option">
+            <a [routerLink]="['/profile/'+user?.id.toString()]">
+              <div *ngIf="user.avatar !== '' && user.avatar !== null" class="icon-wrapper">
+                <img class="avatar" [src]="user.avatar" />
               </div>
-            </div>
-          </a>
+              <div class="adress text" style="opacity: 0.5;">@{{ user.username }}</div>
+              <div class="text">{{ user.name }}</div>
+            </a>
+          </div>
         </mat-option>
       </mat-autocomplete>
     </mat-form-field>
