@@ -1,14 +1,151 @@
-<div class="container">
-    <div id="background_"></div>
-        <img id="profile_picture_img" src="../../../assets/img/user.png" />
+<div class="container2">
+    <ng-container class="user-section" *ngIf="!seePosts">
+        <div class="header-for-img">
+            <div class="image-input">
+                <input #imageInput type="file" accept="image/*" onclick="this.value=null" hidden
+                    (change)="changeListener($event)">
+            </div>
+            <div class="img-container">
+                <img id="profile_picture_img" [src]="user?.avatar" />
+                <div *ngIf="currentUserId === userId">
+                    <ng-template [ngIf]="!readyToSave" [ngIfElse]="saveOptions">
+                        <mat-icon matTooltip="Editar imagem" matTooltipClass="material-tooltip"
+                            (click)="imageInput.click()" class="edit-icon">edit</mat-icon>
+                    </ng-template>
+                    <ng-template #saveOptions>
+                        <mat-icon matTooltip="Salvar imagem" matTooltipClass="material-tooltip" (click)="save()"
+                            class="save-icon">save</mat-icon>
+                        <span class="save-message">Tem certeza que quer salvar este avatar?</span>
+                        <mat-icon matTooltip="Cancelar" matTooltipClass="material-tooltip" (click)="getProfileData()"
+                            class="cancel-icon">cancel</mat-icon>
+                    </ng-template>
+                </div>
+            </div>
+            <p>Entrou em {{ user ? formatDate(user.createdDate) : '' }}</p>
+        </div>
+        <br style="clear: both;">
+        <div class="row">
             <div id="user_data">
-                <p>Nome de usuário</p>
-                <p id="user_adress" style="opacity: 0.5;">@UserName</p>
-            </div> 
-                <p id="header_posts"> Seus posts</p><div style="margin-top: 20px;width: 99.5%; border: 2px solid white; opacity: 0.5;"></div>
-
-    <div class="posts">
-        
-    <div>
-
+                <ng-template [ngIf]="currentUserId === userId" [ngIfElse]="userNameForOtherUsers">
+                    <mat-form-field class="inputForName" style="z-index: 10;">
+                        <!-- <mat-label>Nome</mat-label> -->
+                        <input matInput value="{{ user?.name }}" (keyup.enter)="saveName($event)"
+                            (blur)="saveName($event)" max="255">
+                        <mat-spinner [diameter]="30" class="loadingName" *ngIf="loadingName"></mat-spinner>
+                    </mat-form-field>
+                </ng-template>
+                <ng-template #userNameForOtherUsers>
+                    <p>{{ user?.name }}</p>
+                </ng-template>
+                <p id="user_adress" style="opacity: 0.5;">@{{ user?.username }}</p>
+            </div>
+            <div *ngIf="currentUserId !== userId">
+                <button mat-raised-button class="btn-block follow-btn" type="button" (click)="follow()">
+                    {{ user?.followed ? 'Deixar de seguir' : 'Seguir' }}
+                </button>
+            </div>
+        </div>
+    </ng-container>
+    <br style="clear: both;">
+    <div class="wrapper" (click)="seePosts ? showUser() : showPosts()"> 
+        <!-- matTooltip="{{!seePosts ? 'Mostrar as postagens do usuário' : 'Mostrar usuário'}}" matTooltipClass="material-tooltip" -->
+        <mat-icon *ngIf="!seePosts">
+            keyboard_arrow_up</mat-icon>
+        <mat-icon *ngIf="seePosts">
+            keyboard_arrow_down</mat-icon>
+        <p>
+            {{!seePosts ? 'Clique aqui para visualizar as postagens deste usuário' : 'Voltar para o perfil'}}
+        </p>
+    </div>
+    <br style="clear: both;">
+    <mat-tab-group *ngIf="!seePosts">
+        <mat-tab label="{{ 'Seguindo ( ' + user?.followings.length + ' )'}}">
+            <div *ngFor="let u of user?.followings">
+                <a [routerLink]="['/profile/'+u?.id.toString()]">
+                    <div *ngIf="u !== null" class="person">
+                        <div *ngIf="u.avatar !== '' && u.avatar !== null" class="icon-wrapper">
+                            <img class="icon" [src]="u.avatar" />
+                        </div>
+                        <div class="data-wrapper">
+                            <a class="adress" style="opacity: 0.5;">@{{ u.username }}</a>
+                            <p class="name">{{ u.name }}</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </mat-tab>
+        <mat-tab label="{{ 'Seguidores ( ' + user?.followers.length + ' )'}}">
+            <div *ngFor="let u of user?.followers">
+                <a [routerLink]="['/profile/'+u?.id.toString()]">
+                    <div *ngIf="u !== null" class="person">
+                        <div *ngIf="u.avatar !== '' && u.avatar !== null" class="icon-wrapper">
+                            <img class="icon" [src]="u.avatar" />
+                        </div>
+                        <div class="data-wrapper">
+                            <a class="adress" style="opacity: 0.5;">@{{ u.username }}</a>
+                            <p class="name">{{ u.name }}</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </mat-tab>
+    </mat-tab-group>
+    <mat-grid-list *ngIf="seePosts" cols="2" rowHeight="100%">
+        <mat-grid-tile>
+            <h2>Postagens do usuário</h2>
+            <hr>
+            <br>
+            <div *ngFor="let post of posts" class="card">
+                <mat-card>
+                    <div class="created-date">{{ formatDate(post.createdDate) }}</div>
+                    <mat-icon id="delete-post-button" *ngIf="post.owner.id === userId" (click)="deletePost(post)">
+                        delete</mat-icon>
+                    <mat-card-content>
+                        <div style="min-height: 100px;">
+                            <a href="javascript:window.location.reload(true)">
+                                <div class="poster-icon">
+                                    <img class="icon" [src]="post.owner.avatar" />
+                                </div>
+                                <div class="poster-address-wrapper">
+                                    <a style="opacity:0.5; color:white"> @{{post.owner.username}} </a>
+                                </div>
+                                <br>
+                                <div class="poster-name-wrapper">
+                                    <a style="color:white"> {{post.owner.name}} </a>
+                                </div>
+                            </a>
+                            <div class="post-text">
+                                <p style="padding: 5px;">
+                                    {{post.body}}
+                                </p>
+                            </div>
+                            <div *ngIf="post.image !== ''" class="post-attachment-img">
+                                <img [src]="post.image" class="post-img-container" />
+                            </div>
+                            <div class="react-comment-share">
+                                <button mat-raised-button type="button" class="heart" (click)="like(post)">
+                                    <mat-icon *ngIf="!post.liked">favorite</mat-icon>
+                                    <mat-icon id="favorite" *ngIf="post.liked">favorite</mat-icon>
+                                </button>
+                                <button mat-raised-button type="button" class="comment"
+                                    (click)="openCommentarySection(post)">
+                                    <mat-icon>comment</mat-icon>
+                                </button>
+                                <button mat-raised-button type="button" class="share">
+                                    <mat-icon>wifi_protected_setup</mat-icon>
+                                </button>
+                            </div>
+                        </div>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </mat-grid-tile>
+        <mat-grid-tile>
+            <div class="scroll-wrapper">
+                <ng-template [ngIf]="postSelected">
+                    <app-comments [commentary]="postSelected" (closed)="closeCommentarySection()"></app-comments>
+                </ng-template>
+            </div>
+        </mat-grid-tile>
+    </mat-grid-list>
 </div>

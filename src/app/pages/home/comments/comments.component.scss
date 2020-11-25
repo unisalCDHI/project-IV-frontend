@@ -1,0 +1,17 @@
+header {
+    text-align: right;
+    background-color: rgba($color: #2f64b9, $alpha: 0.2);
+    border-radius: 30px;
+    margin-bottom: 10px;
+}
+
+.close-button {
+    color: white;
+    cursor: pointer;
+    margin: 10px 20px 0 0;
+}
+
+.comment-section {
+    width: 100%;
+    padding: 10px;
+}

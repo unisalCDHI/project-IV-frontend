@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from './../../environments/environment';
@@ -11,6 +12,14 @@ import { CrudService } from './crud.service';
   
     constructor(protected _http: HttpClient) {
         super(_http, environment.apiUrl + '/users')
+    }
+
+    getPosts(userId: number): Observable<any> {
+      return this._http.get<any>(this._base + '/posts/' + userId);
+    }
+
+    follow(userId: number): Observable<any> {
+      return this._http.put<any>(this._base + '/follow/' + userId, null);
     }
 }
   

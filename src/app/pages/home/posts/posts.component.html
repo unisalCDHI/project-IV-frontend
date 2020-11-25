@@ -1,0 +1,95 @@
+<div class="container2">
+    <mat-grid-list cols="2" rowHeight="100%">
+        <mat-grid-tile>
+            <div class="scroll-wrapper">
+                <form [formGroup]="postForm" (ngSubmit)="post()">
+                    <div class="actions-wrapper">
+                        <mat-form-field appearance="fill" style="background-color: rgb(24, 45, 70); width: 100%;">
+                            <mat-label>Alguma novidade?</mat-label>
+                            <textarea formControlName="body" matInput style="resize: none;" maxlength="500"
+                                (blur)="showEmojiPicker ? onBlur() : null" (focus)="onFocus()"></textarea>
+                        </mat-form-field>
+
+                        <div *ngIf="imgBase64 !== '' && imgBase64 !== null" class="image-selected">
+                            <img [src]="imgBase64" alt="">
+                        </div>
+                        <div class="image-input">
+                            <input #imageInput type="file" accept="image/*" onclick="this.value=null" hidden
+                                (change)="changeListener($event)">
+                            <button mat-raised-button id="btn-attachment" (click)="imageInput.click()" type="button">
+                                <mat-icon>insert_photo</mat-icon>
+                            </button>
+                            <button mat-raised-button type="button" id="btn-emoji" (click)="toggleEmojiPicker()">
+                                <mat-icon>insert_emoticon</mat-icon>
+                                <!--😀-->
+                            </button>
+                            <emoji-mart class="emoji-mart" set="{{set}}" *ngIf="showEmojiPicker"
+                                (emojiSelect)="addEmoji($event)" title="Selecione o emoji…"></emoji-mart>
+                            <div class="remove-image-button">
+                                <mat-icon *ngIf="imgBase64 !== '' && imgBase64 !== null" (click)="clearImage()">
+                                    delete</mat-icon>
+                            </div>
+                            <button mat-raised-button type="submit" id="btn-post">Postar</button>
+                        </div>
+                    </div>
+                </form>
+                <br>
+                <div class="posts">
+                    <div *ngFor="let post of posts" class="card">
+                        <mat-card>
+                            <div class="created-date">{{ formatDate(post.createdDate) }}</div>
+                            <mat-icon id="delete-post-button" *ngIf="post.owner.id === myId" (click)="deletePost(post)">
+                                delete</mat-icon>
+                            <mat-card-content>
+                                <div style="min-height: 100px;">
+                                    <a [routerLink]="['/profile/'+post.owner.id.toString()]">
+                                        <div class="poster-icon">
+                                            <img class="icon" [src]="post.owner.avatar" />
+                                        </div>
+                                        <div class="poster-address-wrapper">
+                                            <a style="opacity:0.5; color:white"> @{{post.owner.username}} </a>
+                                        </div>
+                                        <br>
+                                        <div class="poster-name-wrapper">
+                                            <a style="color:white"> {{post.owner.name}} </a>
+                                        </div>
+                                    </a>
+                                    <div class="post-text">
+                                        <p style="padding: 5px;">
+                                            {{post.body}}
+                                        </p>
+                                    </div>
+                                    <div *ngIf="post.image !== ''" class="post-attachment-img">
+                                        <img [src]="post.image" class="post-img-container" />
+                                    </div>
+                                    <div class="react-comment-share">
+                                        <button mat-raised-button type="button" class="heart" (click)="like(post)">
+                                            <mat-icon *ngIf="!post.liked">favorite</mat-icon>
+                                            <mat-icon id="favorite" *ngIf="post.liked">favorite</mat-icon>
+                                            {{ post.likes.length }}
+                                        </button>
+                                        <button mat-raised-button type="button" class="comment"
+                                            (click)="openCommentarySection(post)">
+                                            <mat-icon>comment</mat-icon>
+                                            {{ post.totalCommentaries }}
+                                        </button>
+                                        <button mat-raised-button type="button" class="share">
+                                            <mat-icon>wifi_protected_setup</mat-icon>
+                                        </button>
+                                    </div>
+                                </div>
+                            </mat-card-content>
+                        </mat-card>
+                    </div>
+                </div>
+            </div>
+        </mat-grid-tile>
+        <mat-grid-tile>
+            <div class="scroll-wrapper">
+                <ng-template [ngIf]="postSelected">
+                    <app-comments [commentary]="postSelected" (closed)="closeCommentarySection()"></app-comments>
+                </ng-template>
+            </div>
+        </mat-grid-tile>
+    </mat-grid-list>
+</div>

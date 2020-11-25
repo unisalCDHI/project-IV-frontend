@@ -26,15 +26,17 @@
             </div>
         </mat-grid-tile>
         <mat-grid-tile class="message-container">
-            <div *ngIf="currentUser !== null" class="person">
-                <div *ngIf="currentUser.avatar !== '' && currentUser.avatar !== null" class="icon-wrapper">
-                    <img class="icon" [src]="currentUser.avatar" />
+            <a [routerLink]="['/profile/'+currentUser?.id.toString()]">
+                <div *ngIf="currentUser !== null" class="person">
+                    <div *ngIf="currentUser.avatar !== '' && currentUser.avatar !== null" class="icon-wrapper">
+                        <img class="icon" [src]="currentUser.avatar" />
+                    </div>
+                    <div class="data-wrapper">
+                        <a class="adress" style="opacity: 0.5;">@{{ currentUser.username }}</a>
+                        <p class="name">{{ currentUser.name }}</p>
+                    </div>
                 </div>
-                <div class="data-wrapper">
-                    <a class="adress" style="opacity: 0.5;">@{{ currentUser.username }}</a>
-                    <p class="name">{{ currentUser.name }}</p>
-                </div>
-            </div>
+            </a>
             <div #messageDiv id="messages">
                 <div [className]="msg.sender.id == currentUser.id ? 'message-container-left' : 'message-container-right'"
                     *ngFor="let msg of messages; let i = index">
@@ -51,8 +53,8 @@
                 <form class="message-box" [formGroup]="messageForm" (ngSubmit)="sendMessage()">
                     <mat-form-field appearance="fill" style="background-color: rgb(24, 45, 70); width: 100%;">
                         <mat-label>Digite sua mensagem (max 255)</mat-label>
-                        <textarea matInput style="resize: none; height: 75px;" maxlength="255"
-                            formControlName="body" (keyup.enter)="sendMessage()"></textarea>
+                        <textarea matInput style="resize: none; height: 75px;" maxlength="255" formControlName="body"
+                            (keyup.enter)="sendMessage()"></textarea>
                         <div id="btn-search-icon">
                             <div *ngIf="loading">
                                 <mat-spinner [diameter]="30"></mat-spinner>
