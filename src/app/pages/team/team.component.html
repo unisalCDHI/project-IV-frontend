@@ -1,1 +1,120 @@
-<div class="container">team works!</div>
+<div class="container2">
+
+    <div fxLayout fxLayoutGap="10px">
+        <div fxFlex="60">
+            <h3 class="label-for-title">Você está visualizando o time:</h3>
+            <h1>{{ team?.name }}</h1>
+        </div>
+        <div fxFlex="38">
+            <h3 class="label-for-title">Líder do time</h3>
+            <div>
+                <a [routerLink]="['/profile/'+team?.owner?.id.toString()]">
+                    <div *ngIf="team?.owner !== null" class="person">
+                        <div *ngIf="team?.owner?.avatar !== '' && team?.owner?.avatar !== null" class="icon-wrapper">
+                            <img class="icon" [src]="team?.owner?.avatar" />
+                        </div>
+                        <div class="data-wrapper">
+                            <a class="adress" style="opacity: 0.5;">@{{ team?.owner?.username }}</a>
+                            <p class="name">{{ team?.owner?.name }}</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- <hr> -->
+    <h2>Sobre</h2>
+    <div class="about">
+        <mat-card>{{ team.about }}</mat-card>
+    </div>
+
+    <mat-tab-group>
+        <mat-tab
+            label="{{ 'Postagens ( ' + ((team?.posts !== null && team?.posts !== undefined) ? team?.posts?.length : '0') + ' )'}}">
+            <br>
+            <mat-grid-list cols="2" rowHeight="0.9:2" style="overflow: hidden;">
+                <mat-grid-tile>
+                    <div *ngFor="let post of team?.posts" class="card">
+                        <mat-card>
+                            <div class="created-date">{{ formatDate(post.createdDate) }}</div>
+                            <mat-icon id="delete-post-button" *ngIf="post.owner.id === myId" (click)="deletePost(post)">
+                                delete</mat-icon>
+                            <mat-card-content>
+                                <div style="min-height: 100px;">
+                                    <a [routerLink]="['/profile/'+post.owner.id.toString()]">
+                                        <div class="poster-icon">
+                                            <img class="icon" [src]="post.owner.avatar" />
+                                        </div>
+                                        <div class="poster-address-wrapper">
+                                            <a style="opacity:0.5; color:white"> @{{post.owner.username}} </a>
+                                        </div>
+                                        <br>
+                                        <div class="poster-name-wrapper">
+                                            <a style="color:white"> {{post.owner.name}} </a>
+                                        </div>
+                                    </a>
+                                    <div class="post-text">
+                                        <p style="padding: 5px;">
+                                            {{post.body}}
+                                        </p>
+                                    </div>
+                                    <div *ngIf="post.image !== ''" class="post-attachment-img">
+                                        <img [src]="post.image" class="post-img-container" />
+                                    </div>
+                                    <div class="react-comment-share">
+                                        <button mat-raised-button type="button" class="heart" (click)="like(post)">
+                                            <mat-icon *ngIf="!post.liked">favorite</mat-icon>
+                                            <mat-icon id="favorite" *ngIf="post.liked">favorite</mat-icon>
+                                            {{ post.likes.length }}
+                                        </button>
+                                        <button mat-raised-button type="button" class="comment"
+                                            (click)="openCommentarySection(post)">
+                                            <mat-icon>comment</mat-icon>
+                                            {{ post.totalCommentaries }}
+                                        </button>
+                                        <button mat-raised-button type="button" class="share">
+                                            <mat-icon>wifi_protected_setup</mat-icon>
+                                        </button>
+                                    </div>
+                                </div>
+                            </mat-card-content>
+                        </mat-card>
+                    </div>
+                </mat-grid-tile>
+                <mat-grid-tile>
+                    <div class="scroll-wrapper">
+                        <ng-template [ngIf]="postSelected">
+                            <app-comments [commentary]="postSelected" (closed)="closeCommentarySection()">
+                            </app-comments>
+                        </ng-template>
+                    </div>
+                </mat-grid-tile>
+            </mat-grid-list>
+        </mat-tab>
+        <mat-tab
+            label="{{ 'Membros ( ' + ((team?.members !== null && team?.members !== undefined) ? team?.members?.length : '0') + ' )'}}">
+            <div fxLayout="row wrap" fxLayout.xs="column wrap">
+                <div fxFlex.gt-xs="50%" [fxFlex.gt-md]="regularDistribution" *ngFor="let u of team?.members">
+                    <a [routerLink]="['/profile/'+u?.id.toString()]">
+                        <div *ngIf="u !== null" class="person">
+                            <div *ngIf="u.avatar !== '' && u.avatar !== null" class="icon-wrapper">
+                                <img class="icon" [src]="u.avatar" />
+                            </div>
+                            <div class="data-wrapper">
+                                <a class="adress" style="opacity: 0.5;">@{{ u.username }}</a>
+                                <p class="name">{{ u.name }}</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </mat-tab>
+        <mat-tab>
+            <ng-template mat-tab-label>
+                <span matBadge="0" matBadgePosition="after" matBadgeColor="primary" style="padding: 2px;">
+                    Bate-papo
+                </span>
+            </ng-template>
+        </mat-tab>
+    </mat-tab-group>
+</div>

@@ -14,14 +14,14 @@
                 <mat-icon class="icon">home</mat-icon> <span> Página inicial</span>
             </button>
         </li>
-        <li>
+        <li *ngIf="false" >
             <button mat-button class="btn-block menu-btn" routerLink="/notifications">
                 <mat-icon class="icon">notifications</mat-icon> <span> Notificações</span>
             </button>
         </li>
         <li>
             <button mat-button class="btn-block menu-btn" routerLink="/messages">
-                <mat-icon  matBadge="1" matBadgePosition="after"
+                <mat-icon matBadge="1" matBadgePosition="after"
                 matBadgeColor="primary" class="icon">message</mat-icon> <span> Mensagens</span>
             </button>
         </li>

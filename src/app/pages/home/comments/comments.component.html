@@ -36,6 +36,7 @@
                             <button mat-raised-button type="button" class="heart" (click)="like(commentary)">
                                 <mat-icon *ngIf="!commentary.liked">favorite</mat-icon>
                                 <mat-icon id="favorite" *ngIf="commentary.liked">favorite</mat-icon>
+                                {{ commentary.likes.length }}
                             </button>
                             <button mat-raised-button type="button" class="share">
                                 <mat-icon>wifi_protected_setup</mat-icon>
@@ -111,6 +112,7 @@
                         <button mat-raised-button type="button" class="heart" (click)="like(comment)">
                             <mat-icon *ngIf="!comment.liked">favorite</mat-icon>
                             <mat-icon id="favorite" *ngIf="comment.liked">favorite</mat-icon>
+                            {{ comment.likes.length }}
                         </button>
                         <button mat-raised-button type="button" class="share">
                             <mat-icon>wifi_protected_setup</mat-icon>
