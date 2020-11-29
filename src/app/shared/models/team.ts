@@ -1,3 +1,4 @@
+import { Post } from './post';
 import { User } from './user';
 
 export class Team {
@@ -5,4 +6,6 @@ export class Team {
     name: string;
     owner: User;
     members: User[];
+    about: string;
+    posts: Post[];
 }

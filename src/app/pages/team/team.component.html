@@ -25,37 +25,72 @@
     <!-- <hr> -->
     <h2>Sobre</h2>
     <div class="about">
-        <mat-card>O UNISAL é uma comunidade acadêmica formada por Docentes, Estudantes e pessoal administrativo, que
-            promove de modo rigoroso, crítico e propositivo o desenvolvimento da pessoa humana e do patrimônio cultural
-            da sociedade, mediante a pesquisa, a docência, a formação superior e contínua e os diversos serviços
-            oferecidos às comunidades locais.
-            A inspiração cristã, a natureza católica e a identidade salesiana do UNISAL supõem uma visão do mundo e da
-            pessoa humana enraizadas e em sintonia com o Evangelho, e uma pedagogia fundamentada sobre os valores do
-            Sistema Preventivo vivido por Dom Bosco.
-            Isso implica, concretamente: um compromisso de unidade e comunhão com a Igreja; uma opção decidida em favor
-            dos jovens; uma comunidade acadêmica com clara identidade salesiana; um projeto cultural cristão e
-            salesianamente orientado e uma intencionalidade educativo-pastoral.
-            A integração do conhecimento, o diálogo entre fé e razão, a busca contínua da verdade, a formação ética, o
-            espírito de liberdade na caridade, o respeito recíproco e a promoção dos direitos humanos caracterizam e
-            animam o UNISAL como centro de um saber que dá sabor ao estudo e à pesquisa e favorece a aquisição da
-            verdadeira sabedoria de vida.O UNISAL é uma comunidade acadêmica formada por Docentes, Estudantes e pessoal
-            administrativo, que
-            promove de modo rigoroso, crítico e propositivo o desenvolvimento da pessoa humana e do patrimônio cultural
-            da sociedade, mediante a pesquisa, a docência, a formação superior e contínua e os diversos serviços
-            oferecidos às comunidades locais.
-            A inspiração cristã, a natureza católica e a identidade salesiana do UNISAL supõem uma visão do mundo e da
-            pessoa humana enraizadas e em sintonia com o Evangelho, e uma pedagogia fundamentada sobre os valores do
-            Sistema Preventivo vivido por Dom Bosco.
-            Isso implica, concretamente: um compromisso de unidade e comunhão com a Igreja; uma opção decidida em favor
-            dos jovens; uma comunidade acadêmica com clara identidade salesiana; um projeto cultural cristão e
-            salesianamente orientado e uma intencionalidade educativo-pastoral.
-            A integração do conhecimento, o diálogo entre fé e razão, a busca contínua da verdade, a formação ética, o
-            espírito de liberdade na caridade, o respeito recíproco e a promoção dos direitos humanos caracterizam e
-            animam o UNISAL como centro de um saber que dá sabor ao estudo e à pesquisa e favorece a aquisição da
-            verdadeira sabedoria de vida.</mat-card>
+        <mat-card>{{ team.about }}</mat-card>
     </div>
 
     <mat-tab-group>
+        <mat-tab
+            label="{{ 'Postagens ( ' + ((team?.posts !== null && team?.posts !== undefined) ? team?.posts?.length : '0') + ' )'}}">
+            <br>
+            <mat-grid-list cols="2" rowHeight="0.9:2" style="overflow: hidden;">
+                <mat-grid-tile>
+                    <div *ngFor="let post of team?.posts" class="card">
+                        <mat-card>
+                            <div class="created-date">{{ formatDate(post.createdDate) }}</div>
+                            <mat-icon id="delete-post-button" *ngIf="post.owner.id === myId" (click)="deletePost(post)">
+                                delete</mat-icon>
+                            <mat-card-content>
+                                <div style="min-height: 100px;">
+                                    <a [routerLink]="['/profile/'+post.owner.id.toString()]">
+                                        <div class="poster-icon">
+                                            <img class="icon" [src]="post.owner.avatar" />
+                                        </div>
+                                        <div class="poster-address-wrapper">
+                                            <a style="opacity:0.5; color:white"> @{{post.owner.username}} </a>
+                                        </div>
+                                        <br>
+                                        <div class="poster-name-wrapper">
+                                            <a style="color:white"> {{post.owner.name}} </a>
+                                        </div>
+                                    </a>
+                                    <div class="post-text">
+                                        <p style="padding: 5px;">
+                                            {{post.body}}
+                                        </p>
+                                    </div>
+                                    <div *ngIf="post.image !== ''" class="post-attachment-img">
+                                        <img [src]="post.image" class="post-img-container" />
+                                    </div>
+                                    <div class="react-comment-share">
+                                        <button mat-raised-button type="button" class="heart" (click)="like(post)">
+                                            <mat-icon *ngIf="!post.liked">favorite</mat-icon>
+                                            <mat-icon id="favorite" *ngIf="post.liked">favorite</mat-icon>
+                                            {{ post.likes.length }}
+                                        </button>
+                                        <button mat-raised-button type="button" class="comment"
+                                            (click)="openCommentarySection(post)">
+                                            <mat-icon>comment</mat-icon>
+                                            {{ post.totalCommentaries }}
+                                        </button>
+                                        <button mat-raised-button type="button" class="share">
+                                            <mat-icon>wifi_protected_setup</mat-icon>
+                                        </button>
+                                    </div>
+                                </div>
+                            </mat-card-content>
+                        </mat-card>
+                    </div>
+                </mat-grid-tile>
+                <mat-grid-tile>
+                    <div class="scroll-wrapper">
+                        <ng-template [ngIf]="postSelected">
+                            <app-comments [commentary]="postSelected" (closed)="closeCommentarySection()">
+                            </app-comments>
+                        </ng-template>
+                    </div>
+                </mat-grid-tile>
+            </mat-grid-list>
+        </mat-tab>
         <mat-tab
             label="{{ 'Membros ( ' + ((team?.members !== null && team?.members !== undefined) ? team?.members?.length : '0') + ' )'}}">
             <div fxLayout="row wrap" fxLayout.xs="column wrap">
@@ -73,6 +108,13 @@
                     </a>
                 </div>
             </div>
+        </mat-tab>
+        <mat-tab>
+            <ng-template mat-tab-label>
+                <span matBadge="0" matBadgePosition="after" matBadgeColor="primary" style="padding: 2px;">
+                    Bate-papo
+                </span>
+            </ng-template>
         </mat-tab>
     </mat-tab-group>
 </div>
