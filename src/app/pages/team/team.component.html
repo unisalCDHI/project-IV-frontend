@@ -1,1 +1,78 @@
-<div class="container">team works!</div>
+<div class="container2">
+
+    <div fxLayout fxLayoutGap="10px">
+        <div fxFlex="60">
+            <h3 class="label-for-title">Você está visualizando o time:</h3>
+            <h1>{{ team?.name }}</h1>
+        </div>
+        <div fxFlex="38">
+            <h3 class="label-for-title">Líder do time</h3>
+            <div>
+                <a [routerLink]="['/profile/'+team?.owner?.id.toString()]">
+                    <div *ngIf="team?.owner !== null" class="person">
+                        <div *ngIf="team?.owner?.avatar !== '' && team?.owner?.avatar !== null" class="icon-wrapper">
+                            <img class="icon" [src]="team?.owner?.avatar" />
+                        </div>
+                        <div class="data-wrapper">
+                            <a class="adress" style="opacity: 0.5;">@{{ team?.owner?.username }}</a>
+                            <p class="name">{{ team?.owner?.name }}</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- <hr> -->
+    <h2>Sobre</h2>
+    <div class="about">
+        <mat-card>O UNISAL é uma comunidade acadêmica formada por Docentes, Estudantes e pessoal administrativo, que
+            promove de modo rigoroso, crítico e propositivo o desenvolvimento da pessoa humana e do patrimônio cultural
+            da sociedade, mediante a pesquisa, a docência, a formação superior e contínua e os diversos serviços
+            oferecidos às comunidades locais.
+            A inspiração cristã, a natureza católica e a identidade salesiana do UNISAL supõem uma visão do mundo e da
+            pessoa humana enraizadas e em sintonia com o Evangelho, e uma pedagogia fundamentada sobre os valores do
+            Sistema Preventivo vivido por Dom Bosco.
+            Isso implica, concretamente: um compromisso de unidade e comunhão com a Igreja; uma opção decidida em favor
+            dos jovens; uma comunidade acadêmica com clara identidade salesiana; um projeto cultural cristão e
+            salesianamente orientado e uma intencionalidade educativo-pastoral.
+            A integração do conhecimento, o diálogo entre fé e razão, a busca contínua da verdade, a formação ética, o
+            espírito de liberdade na caridade, o respeito recíproco e a promoção dos direitos humanos caracterizam e
+            animam o UNISAL como centro de um saber que dá sabor ao estudo e à pesquisa e favorece a aquisição da
+            verdadeira sabedoria de vida.O UNISAL é uma comunidade acadêmica formada por Docentes, Estudantes e pessoal
+            administrativo, que
+            promove de modo rigoroso, crítico e propositivo o desenvolvimento da pessoa humana e do patrimônio cultural
+            da sociedade, mediante a pesquisa, a docência, a formação superior e contínua e os diversos serviços
+            oferecidos às comunidades locais.
+            A inspiração cristã, a natureza católica e a identidade salesiana do UNISAL supõem uma visão do mundo e da
+            pessoa humana enraizadas e em sintonia com o Evangelho, e uma pedagogia fundamentada sobre os valores do
+            Sistema Preventivo vivido por Dom Bosco.
+            Isso implica, concretamente: um compromisso de unidade e comunhão com a Igreja; uma opção decidida em favor
+            dos jovens; uma comunidade acadêmica com clara identidade salesiana; um projeto cultural cristão e
+            salesianamente orientado e uma intencionalidade educativo-pastoral.
+            A integração do conhecimento, o diálogo entre fé e razão, a busca contínua da verdade, a formação ética, o
+            espírito de liberdade na caridade, o respeito recíproco e a promoção dos direitos humanos caracterizam e
+            animam o UNISAL como centro de um saber que dá sabor ao estudo e à pesquisa e favorece a aquisição da
+            verdadeira sabedoria de vida.</mat-card>
+    </div>
+
+    <mat-tab-group>
+        <mat-tab
+            label="{{ 'Membros ( ' + ((team?.members !== null && team?.members !== undefined) ? team?.members?.length : '0') + ' )'}}">
+            <div fxLayout="row wrap" fxLayout.xs="column wrap">
+                <div fxFlex.gt-xs="50%" [fxFlex.gt-md]="regularDistribution" *ngFor="let u of team?.members">
+                    <a [routerLink]="['/profile/'+u?.id.toString()]">
+                        <div *ngIf="u !== null" class="person">
+                            <div *ngIf="u.avatar !== '' && u.avatar !== null" class="icon-wrapper">
+                                <img class="icon" [src]="u.avatar" />
+                            </div>
+                            <div class="data-wrapper">
+                                <a class="adress" style="opacity: 0.5;">@{{ u.username }}</a>
+                                <p class="name">{{ u.name }}</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </mat-tab>
+    </mat-tab-group>
+</div>

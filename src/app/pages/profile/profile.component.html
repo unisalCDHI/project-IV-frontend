@@ -47,7 +47,7 @@
         </div>
     </ng-container>
     <br style="clear: both;">
-    <div class="wrapper" (click)="seePosts ? showUser() : showPosts()"> 
+    <div class="wrapper" (click)="seePosts ? showUser() : showPosts()">
         <!-- matTooltip="{{!seePosts ? 'Mostrar as postagens do usuário' : 'Mostrar usuário'}}" matTooltipClass="material-tooltip" -->
         <mat-icon *ngIf="!seePosts">
             keyboard_arrow_up</mat-icon>
@@ -60,33 +60,37 @@
     <br style="clear: both;">
     <mat-tab-group *ngIf="!seePosts">
         <mat-tab label="{{ 'Seguindo ( ' + user?.followings.length + ' )'}}">
-            <div *ngFor="let u of user?.followings">
-                <a [routerLink]="['/profile/'+u?.id.toString()]">
-                    <div *ngIf="u !== null" class="person">
-                        <div *ngIf="u.avatar !== '' && u.avatar !== null" class="icon-wrapper">
-                            <img class="icon" [src]="u.avatar" />
+            <div fxLayout="row wrap" fxLayout.xs="column wrap">
+                <div fxFlex.gt-xs="49%" [fxFlex.gt-md]="regularDistribution" *ngFor="let u of user?.followings">
+                    <a [routerLink]="['/profile/'+u?.id.toString()]">
+                        <div *ngIf="u !== null" class="person">
+                            <div *ngIf="u.avatar !== '' && u.avatar !== null" class="icon-wrapper">
+                                <img class="icon" [src]="u.avatar" />
+                            </div>
+                            <div class="data-wrapper">
+                                <a class="adress" style="opacity: 0.5;">@{{ u.username }}</a>
+                                <p class="name">{{ u.name }}</p>
+                            </div>
                         </div>
-                        <div class="data-wrapper">
-                            <a class="adress" style="opacity: 0.5;">@{{ u.username }}</a>
-                            <p class="name">{{ u.name }}</p>
-                        </div>
-                    </div>
-                </a>
+                    </a>
+                </div>
             </div>
         </mat-tab>
         <mat-tab label="{{ 'Seguidores ( ' + user?.followers.length + ' )'}}">
-            <div *ngFor="let u of user?.followers">
-                <a [routerLink]="['/profile/'+u?.id.toString()]">
-                    <div *ngIf="u !== null" class="person">
-                        <div *ngIf="u.avatar !== '' && u.avatar !== null" class="icon-wrapper">
-                            <img class="icon" [src]="u.avatar" />
+            <div fxLayout="row wrap" fxLayout.xs="column wrap">
+                <div fxFlex.gt-xs="49%" [fxFlex.gt-md]="regularDistribution" *ngFor="let u of user?.followers">
+                    <a [routerLink]="['/profile/'+u?.id.toString()]">
+                        <div *ngIf="u !== null" class="person">
+                            <div *ngIf="u.avatar !== '' && u.avatar !== null" class="icon-wrapper">
+                                <img class="icon" [src]="u.avatar" />
+                            </div>
+                            <div class="data-wrapper">
+                                <a class="adress" style="opacity: 0.5;">@{{ u.username }}</a>
+                                <p class="name">{{ u.name }}</p>
+                            </div>
                         </div>
-                        <div class="data-wrapper">
-                            <a class="adress" style="opacity: 0.5;">@{{ u.username }}</a>
-                            <p class="name">{{ u.name }}</p>
-                        </div>
-                    </div>
-                </a>
+                    </a>
+                </div>
             </div>
         </mat-tab>
     </mat-tab-group>
